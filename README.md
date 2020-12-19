@@ -1,6 +1,7 @@
 # Budget Manager
 <p align="center">
-_My First Android Kotlin Application Developed in Android Studio_
+_Android Kotlin Application_
+  
 </p>
 </center>
 
@@ -8,6 +9,7 @@ _My First Android Kotlin Application Developed in Android Studio_
 ```bash
 Version 1.0.0
 Creation of the app
+https://trello.com/b/rPdyJTK9/budget-app
 ```
 
 ## Programmers
