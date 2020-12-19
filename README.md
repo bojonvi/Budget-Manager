@@ -1,15 +1,21 @@
 # Budget Manager
-<p align="center">
-_Android Kotlin Application_
-  
-</p>
+<center>
+    <p align="center">
+        _iBuget Android Kotlin Application_
+    </p>
 </center>
 
 ## Project Updates
 ```bash
+DECEMBER 19, 2020 : 11:33PM
 Version 1.0.0
-Creation of the app
-https://trello.com/b/rPdyJTK9/budget-app
+- Creation of the app
+- Designed and Match Dashboard Prototype to Actual App
+```bash
+
+Workspace: https://trello.com/b/rPdyJTK9/budget-app
+
+
 ```
 
 ## Programmers

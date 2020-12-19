@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">Budget Manager</string>
+    <string name="app_name">iBudget</string>
+    <string name="ibudget_logo_banner">iBudget Logo Banner</string>
+    <string name="money_balance">0.00</string>
+    <string name="php">PHP</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="budget_list">Budget List</string>
+    <string name="history">History</string>
+    <string name="create_budget">CREATE BUDGET</string>
+    <string name="help">HELP</string>
 </resources>

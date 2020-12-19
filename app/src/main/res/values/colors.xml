@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="wheat">#F5DEB3	</color>
+    <color name="goldenrod">#DAA520</color>
+    <color name="burlywood">#DEB887</color>
+    <color name="cornsilk">#FFF8DC</color>
+    <color name="lawngreen">#7CFC00</color>
+    <color name="limegreen">#32CD32</color>
+    <color name="screenBackground">#E0ECFF</color>
+    <color name="declineRed">#CE435C</color>
+    <color name="bluish">#73A8E9</color>
 </resources>
