@@ -1,7 +1,7 @@
 # Budget Manager
 <center>
     <p align="center">
-        _iBuget Android Kotlin Application_
+        _iBudget Android Kotlin Application_
     </p>
 </center>
 
