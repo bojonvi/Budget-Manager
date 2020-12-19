@@ -4,21 +4,11 @@ _My First Android Kotlin Application Developed in Android Studio_
 </p>
 </center>
 
-## DEMO (VERY EARLY BUILD)
-Link: https://malayancollegesmindanaoo365-my.sharepoint.com/:v:/g/personal/kojuan_mcm_edu_ph/EXW-DUl_OURMu0Jc28QvVuABA4pDyENPp75Yy9EKjPCpCg?e=YNULy1
-
-## SCREENSHOT (VERY EARLY BUILD)
-'Click to expand to Full Resolution'<br>
-[to be uploaded soon]
-
 ## Project Updates
 ```bash
 Version 1.0.0
 Creation of the app
 ```
-
-## Presentation
-[CANVA PRESENTATION](TO BE EDITED)
 
 ## Programmers
 
