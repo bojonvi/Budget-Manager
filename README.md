@@ -11,12 +11,12 @@ DECEMBER 19, 2020 : 11:33PM
 Version 1.0.0
 - Creation of the app
 - Designed and Match Dashboard Prototype to Actual App
-```bash
-
-Workspace: https://trello.com/b/rPdyJTK9/budget-app
-
 
 ```
+<br>
+Workspace: https://trello.com/b/rPdyJTK9/budget-app
+<br>
+
 
 ## Programmers
 
