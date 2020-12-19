@@ -12,7 +12,7 @@ Creation of the app
 
 ## Programmers
 
-[Khian Orland S. Juan](https://facebook.com/KhianJuan2000)<hr>
+[Khian Orland S. Juan](https://facebook.com/KhianJuan2000) <br>
 [Bon Jovi C. Montes](https://www.facebook.com/boodlen.joodlevoodle/)
 
 ## License
