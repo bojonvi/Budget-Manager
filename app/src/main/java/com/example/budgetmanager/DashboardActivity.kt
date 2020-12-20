@@ -6,10 +6,8 @@ import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import android.widget.PopupMenu.OnMenuItemClickListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.text.DecimalFormat
@@ -26,6 +24,66 @@ class DashboardActivity : AppCompatActivity() {
         settingsButtonTapped.setOnClickListener {
             goToSettingsActivity()
         }
+
+        val dashboard_helpButtonTapped: Button = findViewById(R.id.dashboard_helpButton)
+        dashboard_helpButtonTapped.setOnClickListener {
+            val helpPopupMenu = PopupMenu(this@DashboardActivity, dashboard_helpButtonTapped)
+            helpPopupMenu.menuInflater.inflate(R.menu.menu_popup, helpPopupMenu.menu)
+            helpPopupMenu.setOnMenuItemClickListener(object : OnMenuItemClickListener {
+                override fun onMenuItemClick(item: MenuItem?): Boolean {
+                    when (item!!.itemId) {
+                        R.id.howToUseAppOption -> goToHowToUseApp()
+                        R.id.privacyPolicyOption -> goToPrivacyPolicy()
+                    }
+                    return true
+                }
+
+                private fun goToPrivacyPolicy() {
+                    val privacyPolicyIntent =
+                        Intent(this@DashboardActivity, PrivacyPolicy::class.java)
+                    startActivity(privacyPolicyIntent)
+                }
+
+                private fun goToHowToUseApp() {
+                    val howToUseAppIntent =
+                        Intent(this@DashboardActivity, SettingsActivity::class.java)
+                    startActivity(howToUseAppIntent)
+                }
+
+            })
+            helpPopupMenu.show()
+        }
+
+        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
+        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
+        dashboardBudgetListFragmentTapped.setOnClickListener {
+            // Switch to Fragment 1 = Budget List Activity Pane
+
+            val firstFragment = BudgetListFragment() // get the Fragment Instance
+            val manager = supportFragmentManager // Get the Support Fragment manager Instance
+            val transactionManager =
+                manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
+
+            // Replace Fragment in the Container and Finish Transaction
+            transactionManager.replace(R.id.dashboardMainFragment, firstFragment)
+            transactionManager.addToBackStack(null)
+            transactionManager.commit()
+
+        }
+        dashboardHistoryFragmentTapped.setOnClickListener {
+            // Switch to Fragment 2 = History Activity Pane
+
+            val secondFragment = HistoryFragment() // get the Fragment Instance
+            val manager = supportFragmentManager // Get the Support Fragment manager Instance
+            val transactionManager =
+                manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
+
+            // Replace Fragment in the Container and Finish Transaction
+            transactionManager.replace(R.id.dashboardMainFragment, secondFragment)
+            transactionManager.addToBackStack(null)
+            transactionManager.commit()
+        }
+
 
     }
 
@@ -84,7 +142,6 @@ class DashboardActivity : AppCompatActivity() {
         }
         val addMoneyDialogBox = addMoneyAlertDialog.create()
         addMoneyDialogBox.show()
-
     }
 
     private fun formatDecimal(value: String?): String? {

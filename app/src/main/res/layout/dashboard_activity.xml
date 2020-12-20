@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".DashboardActivity">
+
 
     <ImageView
         android:id="@+id/dashboard_backgroundLayer"
@@ -13,9 +14,10 @@
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.428"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/dashboard_background" />
 
     <View
@@ -118,7 +120,7 @@
         app:layout_constraintVertical_bias="0.317" />
 
     <Button
-        android:id="@+id/dashboard_helpButton2"
+        android:id="@+id/dashboard_helpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -130,7 +132,9 @@
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
         app:layout_constraintVertical_bias="0.058" />
 
+
     <LinearLayout
+        android:id="@+id/linearLayoutSelectTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -151,12 +155,12 @@
             android:text="@string/budget_list"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/dashboard_budgetListTab2"
+            app:layout_constraintEnd_toStartOf="@+id/dashboard_historyTabButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_separator" />
 
         <Button
-            android:id="@+id/dashboard_budgetListTab2"
+            android:id="@+id/dashboard_historyTabButton"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,4 +172,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_separator" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dashboardMainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_marginTop="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSelectTab"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/budgetListFragmentId"
+            android:name="com.example.budgetmanager.BudgetListFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
