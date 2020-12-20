@@ -13,10 +13,25 @@ import androidx.appcompat.app.AppCompatActivity
 import java.text.DecimalFormat
 
 class DashboardActivity : AppCompatActivity() {
+    private var backPressedTime: Long = 0
+    private var backToast: Toast? = null
+
+    // Press back again to EXIT APPLICATION
+    override fun onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            backToast!!.cancel()
+            super.onBackPressed()
+            return
+        } else {
+            backToast =
+                Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT)
+            backToast!!.show()
+        }
+        backPressedTime = System.currentTimeMillis()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
 
