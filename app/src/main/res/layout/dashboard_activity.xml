@@ -52,7 +52,7 @@
         android:textColor="@color/white"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/dashboard_addMoneyButton"
+        app:layout_constraintEnd_toStartOf="@+id/dashboard_addMoneyDialogButton"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
 
     <TextView
@@ -80,13 +80,14 @@
         app:layout_constraintTop_toBottomOf="@+id/dashboard_userMoneyBalance" />
 
     <Button
-        android:id="@+id/dashboard_addMoneyButton"
+        android:id="@+id/dashboard_addMoneyDialogButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="120dp"
         android:background="@drawable/ic_add_circle"
         android:backgroundTint="@color/black"
+        android:onClick="showAddMoneyAlert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
 
@@ -99,25 +100,35 @@
         android:background="@drawable/roundedbutton_blue"
         android:text="@string/create_budget"
         app:layout_constraintBottom_toTopOf="@+id/divider_separator"
-        app:layout_constraintEnd_toStartOf="@+id/dashboard_helpButton"
-        app:layout_constraintHorizontal_bias="0.042"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <Button
-        android:id="@+id/dashboard_helpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/dashboard_settingsButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/roundedbutton_blue"
-        android:text="@string/help"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/ic_settings_24dp"
         app:layout_constraintBottom_toTopOf="@+id/divider_separator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.317" />
 
+    <Button
+        android:id="@+id/dashboard_helpButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/roundedbutton_blue"
+        android:text="@string/help"
+        app:layout_constraintBottom_toTopOf="@+id/divider_separator"
+        app:layout_constraintEnd_toStartOf="@+id/dashboard_settingsButton"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
+        app:layout_constraintVertical_bias="0.058" />
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Theme">
+
+        <SwitchPreferenceCompat
+            android:key="switch_perference"
+            android:title="Dark Theme"
+            android:summary="Battery Saver Mode"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="General">
+
+
+        <SwitchPreferenceCompat
+            android:key="switch_perference"
+            android:title="Enable Fingerprint App Lock" />
+
+        <Preference
+            android:key="text"
+            android:title="Support Developers"
+            />
+
+    </PreferenceCategory>
+
+
+
+</PreferenceScreen>
