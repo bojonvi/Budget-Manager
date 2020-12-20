@@ -7,6 +7,12 @@
 
 ## Project Updates
 ```bash
+DECEMBER 20, 2020 : 02:24PM
+- Added Dialog Box for Adding Money in Dashboard
+- Added Settings Activity Layout
+
+```
+```bash
 DECEMBER 19, 2020 : 11:33PM
 Version 1.0.0
 - Creation of the app
