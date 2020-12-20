@@ -14,6 +14,7 @@ DECEMBER 20, 2020 : 02:24PM
 - Added Two Fragment Activity Layout for Budget-List and History-List
 - Added Privacy Policy Tab and Button
 - Added How to Use Button (no Activity Window yet)
+- Press BACK again to Exit Application, added
 ```
 ```bash
 DECEMBER 19, 2020 : 11:33PM
