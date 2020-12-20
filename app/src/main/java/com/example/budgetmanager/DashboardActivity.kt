@@ -10,11 +10,15 @@ import android.widget.*
 import android.widget.PopupMenu.OnMenuItemClickListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.budgetmanager.database.DatabaseHelper
 import java.text.DecimalFormat
 
 class DashboardActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
     private var backToast: Toast? = null
+
+    lateinit var accountTextView: TextView
+    lateinit var databaseHelper: DatabaseHelper
 
     // Press back again to EXIT APPLICATION
     override fun onBackPressed() {
@@ -34,6 +38,20 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
+
+        // Variables
+        databaseHelper = DatabaseHelper(this)
+        accountTextView = findViewById(R.id.dashboard_userMoneyBalance)
+
+        // Data
+        var stringBuffer = StringBuffer()
+        val userData = databaseHelper.userAccount()
+        val budgetData = databaseHelper.readData()
+        while(userData.moveToNext()){
+            stringBuffer.append(userData.getString((2)))
+        }
+        accountTextView.text = stringBuffer.toString()
+
 
         val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
         settingsButtonTapped.setOnClickListener {
@@ -145,6 +163,7 @@ class DashboardActivity : AppCompatActivity() {
                 val inputtedMoney = inputMoneyFieldText.text.toString().toDouble()
                 val sumOfMoneyBalance =
                     (dashboardUserMoneyBalanceTextString + inputtedMoney).toString()
+                databaseHelper.addMoney(formatDecimal(sumOfMoneyBalance).toString())
                 dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance)
                 return@setPositiveButton
             } catch (e: Exception) {
