@@ -1,7 +1,7 @@
 # Budget Manager
 <center>
     <p align="center">
-        _iBudget Android Kotlin Application_
+        _iBudget Android Kotlin Application: A Preparation Project for 2nd Semester_
     </p>
 </center>
 
@@ -10,7 +10,10 @@
 DECEMBER 20, 2020 : 02:24PM
 - Added Dialog Box for Adding Money in Dashboard
 - Added Settings Activity Layout
-
+: 06:47PM
+- Added Two Fragment Activity Layout for Budget-List and History-List
+- Added Privacy Policy Tab and Button
+- Added How to Use Button (no Activity Window yet)
 ```
 ```bash
 DECEMBER 19, 2020 : 11:33PM
@@ -27,7 +30,7 @@ Workspace: https://trello.com/b/rPdyJTK9/budget-app
 ## Programmers
 
 [Khian Orland S. Juan](https://facebook.com/KhianJuan2000) <br>
-[Bon Jovi C. Montes](https://www.facebook.com/boodlen.joodlevoodle/)
+[Bon Jovi C. Montes](https://www.facebook.com/boodlen.joodlevoodle)
 
 ## License
 **_for educational purposes only._**
