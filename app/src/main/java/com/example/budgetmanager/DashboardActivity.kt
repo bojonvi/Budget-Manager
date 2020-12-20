@@ -24,7 +24,8 @@ class DashboardActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             backToast!!.cancel()
-            super.onBackPressed()
+//            super.onBackPressed()
+            finish()
             return
         } else {
             backToast =
