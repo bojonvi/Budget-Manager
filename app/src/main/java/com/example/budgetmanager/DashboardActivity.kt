@@ -17,7 +17,6 @@ import java.text.DecimalFormat
 class DashboardActivity : AppCompatActivity() {
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -68,13 +67,18 @@ class DashboardActivity : AppCompatActivity() {
         }
         addMoneyAlertDialog.setPositiveButton("Add") { dialog, which ->
             try {
-                val inputtedMoney = inputMoneyFieldText.text.toString()
-                dashboardUserMoneyBalanceText.text = formatDecimal(inputtedMoney)
-            } catch (e: NumberFormatException) {
-                val numberFormatExceptionToast = Toast.makeText(this@DashboardActivity, "No money inputted", Toast.LENGTH_SHORT)
-                numberFormatExceptionToast.setGravity(Gravity.CENTER,0,0)
+                val dashboardUserMoneyBalanceTextString =
+                    dashboardUserMoneyBalanceText.text.toString().toDouble()
+                val inputtedMoney = inputMoneyFieldText.text.toString().toDouble()
+                val sumOfMoneyBalance =
+                    (dashboardUserMoneyBalanceTextString + inputtedMoney).toString()
+                dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance)
+                return@setPositiveButton
+            } catch (e: Exception) {
+                val numberFormatExceptionToast =
+                    Toast.makeText(this@DashboardActivity, "No money inputted", Toast.LENGTH_SHORT)
+                numberFormatExceptionToast.setGravity(Gravity.CENTER, 0, 0)
                 numberFormatExceptionToast.show()
-
                 return@setPositiveButton
             }
         }
