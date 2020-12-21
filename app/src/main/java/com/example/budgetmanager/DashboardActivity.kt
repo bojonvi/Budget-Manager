@@ -173,11 +173,7 @@ class DashboardActivity : AppCompatActivity() {
                     databaseHelper.addMoney("%.2f".format(sumOfMoneyBalance))
                     dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
                 } else {
-                    Toast.makeText(
-                        this,
-                        "The balance should not ----- ",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
                 }
 
             } catch (error: Exception) {
