@@ -202,7 +202,7 @@ class DashboardActivity : AppCompatActivity() {
         if (userMoney.toFloat() >= 100000){
             Toast.makeText(
                 this,
-                "The inputted money should not exceed of 100,000PHP",
+                "Your allowance is only allowed up to 100,000PHP",
                 Toast.LENGTH_SHORT
             ).show()
         } else {
