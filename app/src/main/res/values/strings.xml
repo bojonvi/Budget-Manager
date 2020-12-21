@@ -49,4 +49,5 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="how_to_use">How To Use</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="contact_or_reach_out">Contact or Reach out</string>
+    <string name="input_your_money">Input your Money, Example: 100.00</string>
 </resources>

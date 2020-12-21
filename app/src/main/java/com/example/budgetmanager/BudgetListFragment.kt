@@ -36,14 +36,10 @@ class BudgetListFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.budget_list_fragment, container, false)
 
-        val textViewSampleBudgetList1 = view.findViewById<TextView>(R.id.textViewSampleIdSampleAgain)
-        val textViewSampleBudgetList2 = view.findViewById<TextView>(R.id.textViewSampleDismiss)
+        val textViewSampleBudgetList = view.findViewById<TextView>(R.id.textViewSampleDismiss)
 
-        textViewSampleBudgetList1.setOnClickListener {
-            textViewSampleBudgetList1.visibility = View.GONE // when click it will be gone
-        }
-        textViewSampleBudgetList2.setOnClickListener {
-            textViewSampleBudgetList2.visibility = View.GONE // when click it will be gone
+        textViewSampleBudgetList.setOnClickListener {
+            textViewSampleBudgetList.visibility = View.GONE // when click it will be gone
         }
 
 

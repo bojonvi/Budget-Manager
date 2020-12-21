@@ -16,7 +16,7 @@
         <activity
             android:name=".PrivacyPolicy"
             android:label="@string/title_activity_privacy_policy"
-            android:theme="@style/Theme.BudgetManager.NoActionBar"></activity>
+            android:theme="@style/Theme.BudgetManager.NoActionBar" />
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" />

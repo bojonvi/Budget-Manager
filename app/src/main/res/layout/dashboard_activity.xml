@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dashboard_background"
+    android:layoutDirection="ltr"
     tools:context=".DashboardActivity">
+
+    <!-- Default Layout of the App is decided to be Left-To-Right -->
 
     <View
         android:id="@+id/divider_separator"
@@ -34,15 +37,17 @@
         android:id="@+id/dashboard_userMoneyBalance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
+        android:gravity="center"
         android:text="@string/money_balance"
-
         android:textColor="@color/white"
         android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/dashboard_addMoneyDialogButton"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
 
@@ -50,14 +55,16 @@
         android:id="@+id/dashboard_phpTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="5dp"
         android:text="@string/php"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/dashboard_availableBalanceTextView"
         app:layout_constraintEnd_toStartOf="@+id/dashboard_userMoneyBalance"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/dashboard_availableBalanceTextView"
@@ -75,13 +82,17 @@
         android:id="@+id/dashboard_addMoneyDialogButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="116dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="108dp"
         android:background="@drawable/ic_add_circle"
         android:backgroundTint="@color/black"
         android:onClick="showAddMoneyAlert"
+        app:layout_constraintBottom_toTopOf="@+id/dashboard_helpButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
+        app:layout_constraintHorizontal_bias="0.276"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_userMoneyBalance"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/dashboard_createBudgetButton"

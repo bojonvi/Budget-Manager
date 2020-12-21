@@ -36,14 +36,11 @@ class HistoryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.history_fragment, container, false)
 
-        val textViewHistoryList1 = view.findViewById<TextView>(R.id.textViewSampleHistory)
-        val textViewHistoryList2 = view.findViewById<TextView>(R.id.textViewSampleDismissHistory)
 
-        textViewHistoryList1.setOnClickListener {
-            textViewHistoryList1.visibility = View.GONE // when click it will be gone
-        }
-        textViewHistoryList2.setOnClickListener {
-            textViewHistoryList2.visibility = View.GONE // when click it will be gone
+        val textViewHistoryList = view.findViewById<TextView>(R.id.textViewSampleDismissHistory)
+
+        textViewHistoryList.setOnClickListener {
+            textViewHistoryList.visibility = View.GONE // when click it will be gone
         }
 
 

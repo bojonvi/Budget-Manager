@@ -4,7 +4,7 @@
     android:id="@+id/historyFragmentLayoutTab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/burlywood"
+    android:background="@color/cornsilk"
     tools:context=".HistoryFragment">
 
     <!-- Add LinearLayout nor ConstraintLayout in Between para ma-adjust2x-->
@@ -12,19 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/textViewSampleHistory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/design_default_color_primary_variant"
-            android:gravity="center_horizontal"
-            android:padding="10dp"
-            android:text="HISTORY FRAGMENT LIST\nwill be displayed here"
-            android:textColor="@color/bluish"
-            android:textSize="24sp"
-            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textViewSampleDismissHistory"

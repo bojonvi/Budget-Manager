@@ -12,10 +12,10 @@ import android.widget.*
 import android.widget.PopupMenu.OnMenuItemClickListener
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.example.budgetmanager.R.drawable.ic_add_dialog
+import com.example.budgetmanager.R.drawable.ic_cancel_dialog
 import com.example.budgetmanager.database.DatabaseHelper
-import java.lang.Exception
-import java.lang.NullPointerException
-import java.lang.NumberFormatException
 import java.text.DecimalFormat
 
 class DashboardActivity : AppCompatActivity() {
@@ -147,15 +147,22 @@ class DashboardActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
     }
 
-    fun showAddMoneyAlert(view: View) { // avoid warning error that is never used, it is actually used.
+
+    fun showAddMoneyAlert(@Suppress("UNUSED_PARAMETER") view: View) {
+        /* > avoid warning error that the (view: View) is never used, it is actually used to
+            show Alert Dialog Box.
+        > dashboardUserMoneyBalanceText, should be [var] because the numbers are always changing
+          by the user's input and action such as adding and revoking. */
         var dashboardUserMoneyBalanceText: TextView = findViewById(R.id.dashboard_userMoneyBalance)
         val inflater = layoutInflater
         val inflaterView = inflater.inflate(R.layout.addmoney_dialog, null)
 
         val inputMoneyFieldText = inflaterView.findViewById(R.id.inputMoneyField) as EditText
-
+        
         val addMoneyAlertDialog = AlertDialog.Builder(this)
-        addMoneyAlertDialog.setTitle("Add Money Balance")
+        addMoneyAlertDialog.setTitle("Add Money to Account Balance")
+        addMoneyAlertDialog.setNegativeButtonIcon(ContextCompat.getDrawable(this, ic_cancel_dialog))
+        addMoneyAlertDialog.setPositiveButtonIcon(ContextCompat.getDrawable(this, ic_add_dialog))
         addMoneyAlertDialog.setIcon(R.mipmap.ic_launcher)
         addMoneyAlertDialog.setView(inflaterView) // This set Custom XML in Alert Dialog
         addMoneyAlertDialog.setCancelable(false) // prevent cancel on outside touch of dialog
@@ -168,18 +175,24 @@ class DashboardActivity : AppCompatActivity() {
                     (userMoney.toFloat() + inputtedMoney.toFloat())
                 // If the user's inputted money is over 100,000 then warn users
                 if (inputtedMoney.toFloat() > 100000) {
-                    Toast.makeText(
+                    val inputMoneyWarningToastMessage = Toast.makeText(
                         this,
                         "The Inputted money should not exceed more than 100,000PHP",
                         Toast.LENGTH_SHORT
-                    ).show()
-                    // Else if th Total amount of Money Balance in Dashboard is over 100,000, then
+                    )
+                    inputMoneyWarningToastMessage.setGravity(Gravity.CENTER, 0, 0)
+                    inputMoneyWarningToastMessage.show()
+
+                    // Else if the Total amount of Money Balance in Dashboard is over 100,000, then
                 } else if (sumOfMoneyBalance > 100000) {
-                    Toast.makeText(
+                    val totalSumBalanceWarningToastMessage = Toast.makeText(
                         this,
                         "The Money Balance should not exceed mroe than 100,000PHP",
                         Toast.LENGTH_SHORT
-                    ).show()
+                    )
+                    totalSumBalanceWarningToastMessage.setGravity(Gravity.CENTER, 0, 0)
+                    totalSumBalanceWarningToastMessage.show()
+
                     // Else, if everything is fine & Dashboard money balance
                     // and inputted money is not over 100,000PHP, then add money
                 } else {
