@@ -160,30 +160,28 @@ class DashboardActivity : AppCompatActivity() {
         addMoneyAlertDialog.setView(inflaterView) // This set Custom XML in Alert Dialog
         addMoneyAlertDialog.setCancelable(false) // prevent cancel on outside touch of dialog
         addMoneyAlertDialog.create()
-        addMoneyAlertDialog.setNegativeButton("Cancel") { _, _ ->
-
-            return@setNegativeButton
-        }
+        addMoneyAlertDialog.setNegativeButton("Cancel") { _, _ -> return@setNegativeButton }
         addMoneyAlertDialog.setPositiveButton("Add") { _, _ ->
             try {
                 val inputtedMoney = "%.2f".format(inputMoneyFieldText.text.toString().toFloat())
                 val sumOfMoneyBalance =
                     (userMoney.toFloat() + inputtedMoney.toFloat())
-                // Inputted Money over 100,000
-                if (inputtedMoney.toFloat() > 100000){
+                // If the user's inputted money is over 100,000 then warn users
+                if (inputtedMoney.toFloat() > 100000) {
                     Toast.makeText(
                         this,
-                        "INPUTTED Money should not exceed 100,000PHP",
+                        "The Inputted money should not exceed more than 100,000PHP",
                         Toast.LENGTH_SHORT
                     ).show()
-                // Total amount money over 100,000
+                    // Else if th Total amount of Money Balance in Dashboard is over 100,000, then
                 } else if (sumOfMoneyBalance > 100000) {
                     Toast.makeText(
                         this,
-                        "The balance should not exceed 100,000PHP",
+                        "The Money Balance should not exceed mroe than 100,000PHP",
                         Toast.LENGTH_SHORT
                     ).show()
-                // Total amount money and inputted money is not over 100,000
+                    // Else, if everything is fine & Dashboard money balance
+                    // and inputted money is not over 100,000PHP, then add money
                 } else {
                     userMoney = "%.2f".format(sumOfMoneyBalance)
                     databaseHelper.addMoney(userMoney)
@@ -196,7 +194,7 @@ class DashboardActivity : AppCompatActivity() {
                         val numberFormatExceptionToast =
                             Toast.makeText(
                                 this@DashboardActivity,
-                                "No money inputted",
+                                "No money balance inputted.",
                                 Toast.LENGTH_SHORT
                             )
                         numberFormatExceptionToast.setGravity(Gravity.CENTER, 0, 0)
@@ -209,11 +207,11 @@ class DashboardActivity : AppCompatActivity() {
                 }
             }
         }
-        if (userMoney.toFloat() >= 100000){
+        if (userMoney.toFloat() >= 100000) {
             Toast.makeText(
                 this,
-                "Your allowance is only allowed up to 100,000PHP",
-                Toast.LENGTH_SHORT
+                "The allowance money balance is up to 100,000PHP only",
+                Toast.LENGTH_LONG
             ).show()
         } else {
             val addMoneyDialogBox = addMoneyAlertDialog.create()
