@@ -223,7 +223,8 @@ class DashboardActivity : AppCompatActivity() {
                 } else {
                     userMoney = "%.2f".format(sumOfMoneyBalance)
                     databaseHelper.addMoney(userMoney)
-                    dashboardUserMoneyBalanceText.text = formatDecimal((availableMoney.toFloat() + inputtedMoney.toFloat()).toString())
+                    availableMoney = (availableMoney.toFloat() + inputtedMoney.toFloat()).toString()
+                    dashboardUserMoneyBalanceText.text = formatDecimal(availableMoney)
                 }
 
                 // https://youtu.be/Vy_4sZ6JVHM 3:42 duration .
