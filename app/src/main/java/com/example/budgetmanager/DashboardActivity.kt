@@ -57,7 +57,7 @@ class DashboardActivity : AppCompatActivity() {
         }
         accountTextView.text = formatDecimal(userMoney)
 
-        
+
         val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
         settingsButtonTapped.setOnClickListener {
             goToSettingsActivity()
@@ -199,7 +199,7 @@ class DashboardActivity : AppCompatActivity() {
                 }
             }
         }
-        if (dashboardUserMoneyBalanceText.text.toString().toFloat() >= 100000){
+        if (userMoney.toFloat() >= 100000){
             Toast.makeText(
                 this,
                 "You have reached your maximum allowance of 100,000PHP",
