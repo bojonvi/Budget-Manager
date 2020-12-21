@@ -175,7 +175,7 @@ class DashboardActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(
                         this,
-                        "The balance should not ----- ",
+                        "The balance should not exceed 100,000PHP",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
