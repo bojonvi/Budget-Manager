@@ -101,6 +101,14 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         return read
     }
 
+    fun updateBudget(budgetID: String) {
+        val db: SQLiteDatabase = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(BUDGET_STATUS, "finished")
+        db.update(BUDGET_TABLE, contentValues, "${BaseColumns._ID}=?", arrayOf(budgetID))
+        db.close()
+    }
+
     companion object{
         private const val DATABASE_NAME = "Person.db"
         private const val DATABASE_VERSION = 1

@@ -53,7 +53,11 @@ class BudgetListFragment : Fragment() {
         val budgetData = databaseHelper.readBudget()
         while (budgetData.moveToNext()) {
             val textView = TextView(activity)
-            textView.text = budgetData.getString(2)
+            textView.text = budgetData.getString(0)
+            textView.textSize = 20f
+            textView.setOnClickListener{
+
+            }
             view.findViewById<LinearLayout>(R.id.budgetListLinearLayout).addView(textView)
         }
 
