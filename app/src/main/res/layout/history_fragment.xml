@@ -4,7 +4,7 @@
     android:id="@+id/historyFragmentLayoutTab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bluish"
+    android:background="@color/burlywood"
     tools:context=".HistoryFragment">
 
     <!-- Add LinearLayout nor ConstraintLayout in Between para ma-adjust2x-->
