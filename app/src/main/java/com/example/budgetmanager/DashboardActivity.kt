@@ -24,6 +24,7 @@ class DashboardActivity : AppCompatActivity() {
 
     lateinit var accountTextView: TextView
     lateinit var databaseHelper: DatabaseHelper
+    lateinit var userMoney: String
 
     // Press back again to EXIT APPLICATION
     override fun onBackPressed() {
@@ -39,11 +40,9 @@ class DashboardActivity : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
-
 
         // Variables
         databaseHelper = DatabaseHelper(this)
@@ -54,11 +53,11 @@ class DashboardActivity : AppCompatActivity() {
         val userData = databaseHelper.userAccount()
         val budgetData = databaseHelper.readData()
         while (userData.moveToNext()) {
-            stringBuffer.append(userData.getString((2)))
+            userMoney = userData.getString((2))
         }
-        accountTextView.text = stringBuffer.toString()
+        accountTextView.text = formatDecimal(userMoney)
 
-
+        
         val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
         settingsButtonTapped.setOnClickListener {
             goToSettingsActivity()
@@ -126,11 +125,7 @@ class DashboardActivity : AppCompatActivity() {
             transactionManager.replace(R.id.dashboardMainFragment, secondFragment)
             transactionManager.addToBackStack(null)
             transactionManager.commit()
-
-
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -152,7 +147,6 @@ class DashboardActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
     }
 
-
     fun showAddMoneyAlert(view: View) { // avoid warning error that is never used, it is actually used.
         var dashboardUserMoneyBalanceText: TextView = findViewById(R.id.dashboard_userMoneyBalance)
         val inflater = layoutInflater
@@ -172,13 +166,20 @@ class DashboardActivity : AppCompatActivity() {
         }
         addMoneyAlertDialog.setPositiveButton("Add") { _, _ ->
             try {
-                val dashboardUserMoneyBalanceTextString =
-                    dashboardUserMoneyBalanceText.text.toString().toDouble()
-                val inputtedMoney = inputMoneyFieldText.text.toString().toDouble()
+                val inputtedMoney = "%.2f".format(inputMoneyFieldText.text.toString().toFloat())
                 val sumOfMoneyBalance =
-                    (dashboardUserMoneyBalanceTextString + inputtedMoney).toString()
-                databaseHelper.addMoney(formatDecimal(sumOfMoneyBalance).toString())
-                dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance)
+                    (userMoney.toFloat() + inputtedMoney.toFloat())
+                if (sumOfMoneyBalance <= 100000){
+                    databaseHelper.addMoney("%.2f".format(sumOfMoneyBalance))
+                    dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Your maximum allowance is only 100,000PHP",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
             } catch (error: Exception) {
                 when (error) { // This is Kotlin's multi-catch handling
                     is NullPointerException, is NumberFormatException, is FormatException -> {
@@ -195,18 +196,23 @@ class DashboardActivity : AppCompatActivity() {
                     else -> {
                         throw error
                     }
-
                 }
-
             }
         }
-        val addMoneyDialogBox = addMoneyAlertDialog.create()
-        addMoneyDialogBox.show()
+        if (dashboardUserMoneyBalanceText.text.toString().toFloat() >= 100000){
+            Toast.makeText(
+                this,
+                "You have reached your maximum allowance of 100,000PHP",
+                Toast.LENGTH_SHORT
+            ).show()
+        } else {
+            val addMoneyDialogBox = addMoneyAlertDialog.create()
+            addMoneyDialogBox.show()
+        }
     }
 
     private fun formatDecimal(value: String?): String? {
         val df = DecimalFormat("#,###,##0.00")
         return df.format(java.lang.Double.valueOf(value!!))
-
     }
 }
