@@ -169,15 +169,25 @@ class DashboardActivity : AppCompatActivity() {
                 val inputtedMoney = "%.2f".format(inputMoneyFieldText.text.toString().toFloat())
                 val sumOfMoneyBalance =
                     (userMoney.toFloat() + inputtedMoney.toFloat())
-                if (sumOfMoneyBalance <= 100000){
-                    databaseHelper.addMoney("%.2f".format(sumOfMoneyBalance))
-                    dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
-                } else {
+                // Inputted Money over 100,000
+                if (inputtedMoney.toFloat() > 100000){
+                    Toast.makeText(
+                        this,
+                        "INPUTTED Money should not exceed 100,000PHP",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                // Total amount money over 100,000
+                } else if (sumOfMoneyBalance > 100000) {
                     Toast.makeText(
                         this,
                         "The balance should not exceed 100,000PHP",
                         Toast.LENGTH_SHORT
                     ).show()
+                // Total amount money and inputted money is not over 100,000
+                } else {
+                    userMoney = "%.2f".format(sumOfMoneyBalance)
+                    databaseHelper.addMoney(userMoney)
+                    dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
                 }
 
             } catch (error: Exception) {
