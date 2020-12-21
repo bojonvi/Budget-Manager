@@ -9,6 +9,7 @@
 
     <!-- Add LinearLayout nor ConstraintLayout in Between para ma-adjust2x-->
     <LinearLayout
+        android:id="@+id/budgetListLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,8 +20,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/bluish"
-            android:padding="10dp"
             android:gravity="center"
+            android:padding="10dp"
             android:text="Tap this to dismiss this BUDGET LIST TextView\nFragment Background is set to transparent.\n\n\nTextView lang ito, hindi to actual card..."
             android:textColor="@color/cornsilk"
             android:textSize="18sp"

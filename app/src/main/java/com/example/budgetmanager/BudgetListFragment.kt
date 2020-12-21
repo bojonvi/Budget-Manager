@@ -1,5 +1,7 @@
 package com.example.budgetmanager
 
+import android.app.Activity
+import android.database.Cursor
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.LinearLayout
 import android.widget.TextView
+import com.example.budgetmanager.database.DatabaseHelper
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +48,14 @@ class BudgetListFragment : Fragment() {
             textViewSampleBudgetList.visibility = View.GONE // when click it will be gone
         }
 
+        // Budget Data
+        val databaseHelper = DatabaseHelper(activity!!.applicationContext)
+        val budgetData = databaseHelper.readBudget()
+        while (budgetData.moveToNext()) {
+            val textView = TextView(activity)
+            textView.text = budgetData.getString(2)
+            view.findViewById<LinearLayout>(R.id.budgetListLinearLayout).addView(textView)
+        }
 
         // Inflate the layout for this fragment
         return view

@@ -53,22 +53,28 @@ class DashboardActivity : AppCompatActivity() {
         }
         availableMoney = (userMoney.toFloat()).toString()
 
+
         // Available Balance Data
         budgetData = databaseHelper.readBudget()
         while (budgetData.moveToNext()) {
             availableMoney = (availableMoney.toFloat() - budgetData.getString((2)).toFloat()).toString()
         }
         accountTextView.text = formatDecimal(availableMoney)
+
+        budgetListFragment()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
 
+
         // Variables
         databaseHelper = DatabaseHelper(this)
         accountTextView = findViewById(R.id.dashboard_userMoneyBalance)
 
+
+        // Buttons
         val dashboardCreateBudgetActivityTapped: Button = findViewById(R.id.dashboard_createBudgetButton)
         dashboardCreateBudgetActivityTapped.setOnClickListener {
             val activity = Intent(this, CreateBudgetActivity::class.java)
@@ -115,43 +121,20 @@ class DashboardActivity : AppCompatActivity() {
             helpPopupMenu.show()
         }
 
-        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
-        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
-        dashboardBudgetListFragmentTapped.setOnClickListener {
-            // Switch to Fragment 1 = Budget List Activity Pane
-            dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT_BOLD
-            dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT
-            val firstFragment = BudgetListFragment() // get the Fragment Instance
-            val manager = supportFragmentManager // Get the Support Fragment manager Instance
-            val transactionManager =
-                manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
-
-            // Replace Fragment in the Container and Finish Transaction
-            transactionManager.replace(R.id.dashboardMainFragment, firstFragment)
-            transactionManager.addToBackStack(null)
-            transactionManager.commit()
-
-        }
-
-        dashboardHistoryFragmentTapped.setOnClickListener {
-            // Switch to Fragment 2 = History Activity Pane
-            dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT_BOLD
-            dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT
-            val secondFragment = HistoryFragment() // get the Fragment Instance
-            val manager = supportFragmentManager // Get the Support Fragment manager Instance
-            val transactionManager =
-                manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
-
-            // Replace Fragment in the Container and Finish Transaction
-            transactionManager.replace(R.id.dashboardMainFragment, secondFragment)
-            transactionManager.addToBackStack(null)
-            transactionManager.commit()
-        }
-
-
         val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
         settingsButtonTapped.setOnClickListener {
             goToSettingsActivity()
+        }
+
+
+        // Fragments
+        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
+        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
+        dashboardBudgetListFragmentTapped.setOnClickListener {
+            budgetListFragment()
+        }
+        dashboardHistoryFragmentTapped.setOnClickListener {
+            historyListFragment()
         }
     }
 
@@ -263,5 +246,41 @@ class DashboardActivity : AppCompatActivity() {
     private fun formatDecimal(value: String?): String? {
         val df = DecimalFormat("#,###,##0.00")
         return df.format(java.lang.Double.valueOf(value!!))
+    }
+
+    private fun budgetListFragment(){
+        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
+        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
+
+        // Switch to Fragment 1 = Budget List Activity Pane
+        dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT_BOLD
+        dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT
+        val firstFragment = BudgetListFragment() // get the Fragment Instance
+        val manager = supportFragmentManager // Get the Support Fragment manager Instance
+        val transactionManager =
+            manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
+
+        // Replace Fragment in the Container and Finish Transaction
+        transactionManager.replace(R.id.dashboardMainFragment, firstFragment)
+        transactionManager.addToBackStack(null)
+        transactionManager.commit()
+    }
+
+    private fun historyListFragment(){
+        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
+        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
+
+        // Switch to Fragment 2 = History Activity Pane
+        dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT_BOLD
+        dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT
+        val secondFragment = HistoryFragment() // get the Fragment Instance
+        val manager = supportFragmentManager // Get the Support Fragment manager Instance
+        val transactionManager =
+            manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
+
+        // Replace Fragment in the Container and Finish Transaction
+        transactionManager.replace(R.id.dashboardMainFragment, secondFragment)
+        transactionManager.addToBackStack(null)
+        transactionManager.commit()
     }
 }
