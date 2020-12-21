@@ -1,11 +1,17 @@
 package com.example.budgetmanager.database
 
+import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
+import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.BUDGET_DESCRIPTION
+import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.BUDGET_MONEY
+import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.BUDGET_STATUS
+import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.BUDGET_TABLE
+import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.BUDGET_TITLE
 import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.NAME_COLUMN
 import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.TABLE_NAME
 import com.example.budgetmanager.database.DatabaseContainer.PersonTable.Companion.USER_MONEY
@@ -24,6 +30,13 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 USER_NAME + " TEXT, " +
                 USER_MONEY + " TEXT" + ")"
+        db!!.execSQL(personTable)
+        personTable = "CREATE TABLE " + BUDGET_TABLE + "(" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                BUDGET_TITLE + " TEXT, " +
+                BUDGET_MONEY + " TEXT, " +
+                BUDGET_DESCRIPTION + " TEXT, " +
+                BUDGET_STATUS + " TEXT" + ")"
         db!!.execSQL(personTable)
     }
 
@@ -69,6 +82,23 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         db.close()
 
         return !update_data.equals(-1)
+    }
+
+    fun createBudget(budgetTitle: String, budgetMoney: String, budgetDescription: String){
+        val db: SQLiteDatabase = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(BUDGET_TITLE, budgetTitle)
+        contentValues.put(BUDGET_MONEY, budgetMoney)
+        contentValues.put(BUDGET_DESCRIPTION, budgetDescription)
+        contentValues.put(BUDGET_STATUS, "pending")
+        db.insert(BUDGET_TABLE, null, contentValues)
+        db.close()
+    }
+
+    fun readBudget(): Cursor {
+        val db: SQLiteDatabase = this.writableDatabase
+        val read: Cursor = db.rawQuery("SELECT * FROM $BUDGET_TABLE ORDER BY $BUDGET_TITLE ASC", null)
+        return read
     }
 
     companion object{

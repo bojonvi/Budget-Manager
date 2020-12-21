@@ -2,20 +2,62 @@ package com.example.budgetmanager
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import com.example.budgetmanager.database.DatabaseHelper
+import java.lang.Exception
 
 class CreateBudgetActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_budget_activity)
 
-        // BUG IN LINE 15 - Caused by: java.lang.NullPointerException: findViewById(R.id.dashboard_userMoneyBalance) must not be null
-        // logic ko: kung ano ang text string sa Available Balance, kunin nya at i-load sa Create B udget Activity
-        val dashboard_userMoneyBalanceLoad: TextView = findViewById(R.id.dashboard_userMoneyBalance)
-        val createBudgetPreviewDashboardAvailableBalanceLoad: TextView =
+        // Variables
+        val databaseHelper = DatabaseHelper(this)
+        val availableMoney = intent.getStringExtra("availableMoney")
+        val createBudgetAvailableBalance: TextView =
             findViewById(R.id.createBudgetPreviewDashboardAvailableBalance)
-        // Load Dashboard Money Available balance to the Create budget Activity Window
-        createBudgetPreviewDashboardAvailableBalanceLoad.text = dashboard_userMoneyBalanceLoad.toString()
+        val createBudgetTitleField: EditText =
+            findViewById(R.id.createBudgetTitleField)
+        val createBudgetDescriptionField: EditText =
+            findViewById(R.id.createBudgetDescriptionField)
+        val createBudgetMoneyField: EditText =
+            findViewById(R.id.createBudgetMoneyField)
+
+        // UI Modification
+        createBudgetAvailableBalance.text = availableMoney
+
+        // Done Function
+        findViewById<ImageView>(R.id.doneImageButton).setOnClickListener{
+            // Variables
+            val createBudgetTitleFieldString: String =
+                createBudgetTitleField.text.toString()
+            val createBudgetDescriptionFieldString: String =
+                createBudgetDescriptionField.text.toString()
+            val createBudgetMoneyFieldFloat: Float
+
+            // Input Checker
+            try{
+                createBudgetMoneyFieldFloat = createBudgetMoneyField.text.toString().toFloat()
+                Toast.makeText(this, createBudgetTitleFieldString, Toast.LENGTH_SHORT).show()
+                if (createBudgetTitleFieldString.isEmpty()){
+                    createBudgetTitleField.error = "Title must not be empty!"
+                } else if (createBudgetMoneyFieldFloat > availableMoney!!.toFloat()){
+                    createBudgetMoneyField.error = "Insufficient Allowance"
+                } else {
+                    databaseHelper.createBudget(createBudgetTitleFieldString, createBudgetMoneyFieldFloat.toString(), createBudgetDescriptionFieldString)
+                    finish()
+                }
+            } catch (e: Exception){
+                if (createBudgetMoneyField.text.toString().isEmpty()){
+                    createBudgetMoneyField.error = "No Money Input"
+                } else {
+                    createBudgetMoneyField.error = "Incorrect Money Input"
+                }
+            }
+        }
 
     }
 }

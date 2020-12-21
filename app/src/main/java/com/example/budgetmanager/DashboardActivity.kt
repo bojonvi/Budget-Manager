@@ -1,6 +1,7 @@
 package com.example.budgetmanager
 
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Typeface
 import android.nfc.FormatException
 import android.os.Bundle
@@ -25,6 +26,9 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var accountTextView: TextView
     lateinit var databaseHelper: DatabaseHelper
     lateinit var userMoney: String
+    lateinit var availableMoney: String
+    lateinit var userData: Cursor
+    lateinit var budgetData: Cursor
 
     // Press back again to EXIT APPLICATION
     override fun onBackPressed() {
@@ -40,6 +44,23 @@ class DashboardActivity : AppCompatActivity() {
         backPressedTime = System.currentTimeMillis()
     }
 
+    override fun onStart() {
+        super.onStart()
+        // Data
+        userData = databaseHelper.userAccount()
+        while (userData.moveToNext()) {
+            userMoney = userData.getString((2))
+        }
+        availableMoney = (userMoney.toFloat()).toString()
+
+        // Available Balance Data
+        budgetData = databaseHelper.readBudget()
+        while (budgetData.moveToNext()) {
+            availableMoney = (availableMoney.toFloat() - budgetData.getString((2)).toFloat()).toString()
+        }
+        accountTextView.text = formatDecimal(availableMoney)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
@@ -48,18 +69,11 @@ class DashboardActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(this)
         accountTextView = findViewById(R.id.dashboard_userMoneyBalance)
 
-        // Data
-        var stringBuffer = StringBuffer()
-        val userData = databaseHelper.userAccount()
-        val budgetData = databaseHelper.readData()
-        while (userData.moveToNext()) {
-            userMoney = userData.getString((2))
-        }
-        accountTextView.text = formatDecimal(userMoney)
-
         val dashboardCreateBudgetActivityTapped: Button = findViewById(R.id.dashboard_createBudgetButton)
         dashboardCreateBudgetActivityTapped.setOnClickListener {
-            startActivity(Intent(this, CreateBudgetActivity::class.java))
+            val activity = Intent(this, CreateBudgetActivity::class.java)
+            activity.putExtra("availableMoney", availableMoney)
+            startActivity(activity)
             overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
         }
 
@@ -209,7 +223,7 @@ class DashboardActivity : AppCompatActivity() {
                 } else {
                     userMoney = "%.2f".format(sumOfMoneyBalance)
                     databaseHelper.addMoney(userMoney)
-                    dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
+                    dashboardUserMoneyBalanceText.text = formatDecimal((availableMoney.toFloat() + inputtedMoney.toFloat()).toString())
                 }
 
                 // https://youtu.be/Vy_4sZ6JVHM 3:42 duration .
