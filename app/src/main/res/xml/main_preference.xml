@@ -5,7 +5,7 @@
         android:title="Theme">
 
         <SwitchPreferenceCompat
-            android:key="switch_perference"
+            android:key="theme_switch_preference"
             android:title="Dark Theme"
             android:summary="Battery Saver Mode"/>
 
@@ -17,7 +17,7 @@
 
 
         <SwitchPreferenceCompat
-            android:key="switch_perference"
+            android:key="fingerprint_switch_preference"
             android:title="Enable Fingerprint App Lock" />
 
         <Preference

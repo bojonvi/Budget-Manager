@@ -6,7 +6,7 @@
     <string name="available_balance">Available Balance</string>
     <string name="budget_list">Budget List</string>
     <string name="history">History</string>
-    <string name="create_budget">CREATE BUDGET</string>
+    <string name="create_budget">Create Budget</string>
     <string name="help">HELP</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
@@ -50,4 +50,9 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="privacy_policy">Privacy Policy</string>
     <string name="contact_or_reach_out">Contact or Reach out</string>
     <string name="input_your_money">Input your Money, Example: 100.00</string>
+    <string name="budget_title">Budget Title</string>
+    <string name="done">done</string>
+    <string name="description_optional">Description (Optional)</string>
+    <string name="amount_of_money_to_spend">Amount of Money to Spend, Ex: 100.00</string>
+    <string name="loading">loading...</string>
 </resources>

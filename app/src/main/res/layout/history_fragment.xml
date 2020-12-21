@@ -4,7 +4,7 @@
     android:id="@+id/historyFragmentLayoutTab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cornsilk"
+    android:background="@android:color/transparent"
     tools:context=".HistoryFragment">
 
     <!-- Add LinearLayout nor ConstraintLayout in Between para ma-adjust2x-->
@@ -18,11 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/design_default_color_primary_variant"
+            android:background="@color/bluish"
             android:padding="10dp"
-            android:text="Tap this to dismiss temporarily"
-            android:textColor="@color/goldenrod"
-            android:textSize="24sp"
+            android:gravity="center"
+            android:text="Tap this to dismiss this HISTORY Fragment TextView\nFragment Background is set to transparent.\nTextView lang ito, hindi to actual card..."
+            android:textColor="@color/cornsilk"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     </LinearLayout>

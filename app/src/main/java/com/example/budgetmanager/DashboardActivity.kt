@@ -57,10 +57,10 @@ class DashboardActivity : AppCompatActivity() {
         }
         accountTextView.text = formatDecimal(userMoney)
 
-
-        val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
-        settingsButtonTapped.setOnClickListener {
-            goToSettingsActivity()
+        val dashboardCreateBudgetActivityTapped: Button = findViewById(R.id.dashboard_createBudgetButton)
+        dashboardCreateBudgetActivityTapped.setOnClickListener {
+            startActivity(Intent(this, CreateBudgetActivity::class.java))
+            overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out)
         }
 
         val dashboardHelpButtonTapped: Button = findViewById(R.id.dashboard_helpButton)
@@ -84,10 +84,17 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 private fun goToHowToUseApp() {
-                    val howToUseAppIntent =
-                        Intent(this@DashboardActivity, SettingsActivity::class.java)
-                    startActivity(howToUseAppIntent)
-                    overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
+//                    val howToUseAppIntent =
+//                        Intent(this@DashboardActivity, SettingsActivity::class.java)
+//                    startActivity(howToUseAppIntent)
+//                    overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
+                    val maintenanceInformationAlertDialog = AlertDialog.Builder(this@DashboardActivity)
+                    maintenanceInformationAlertDialog.setTitle("Not yet accessible")
+                    maintenanceInformationAlertDialog.setMessage("Instructions on How to use iBudget will be available soon.")
+                    maintenanceInformationAlertDialog.setCancelable(true) // can cancel on outside touch of dialog
+                    maintenanceInformationAlertDialog.setPositiveButton("Okay") {_, _ -> return@setPositiveButton}
+                    val maintenanceInformationAlertDialogShow = maintenanceInformationAlertDialog.create()
+                    maintenanceInformationAlertDialogShow.show()
                 }
 
             })
@@ -110,8 +117,8 @@ class DashboardActivity : AppCompatActivity() {
             transactionManager.addToBackStack(null)
             transactionManager.commit()
 
-
         }
+
         dashboardHistoryFragmentTapped.setOnClickListener {
             // Switch to Fragment 2 = History Activity Pane
             dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT_BOLD
@@ -126,13 +133,18 @@ class DashboardActivity : AppCompatActivity() {
             transactionManager.addToBackStack(null)
             transactionManager.commit()
         }
+
+
+        val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
+        settingsButtonTapped.setOnClickListener {
+            goToSettingsActivity()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
 
@@ -147,7 +159,6 @@ class DashboardActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
     }
 
-
     fun showAddMoneyAlert(@Suppress("UNUSED_PARAMETER") view: View) {
         /* > avoid warning error that the (view: View) is never used, it is actually used to
             show Alert Dialog Box.
@@ -158,7 +169,7 @@ class DashboardActivity : AppCompatActivity() {
         val inflaterView = inflater.inflate(R.layout.addmoney_dialog, null)
 
         val inputMoneyFieldText = inflaterView.findViewById(R.id.inputMoneyField) as EditText
-        
+
         val addMoneyAlertDialog = AlertDialog.Builder(this)
         addMoneyAlertDialog.setTitle("Add Money to Account Balance")
         addMoneyAlertDialog.setNegativeButtonIcon(ContextCompat.getDrawable(this, ic_cancel_dialog))
@@ -200,6 +211,8 @@ class DashboardActivity : AppCompatActivity() {
                     databaseHelper.addMoney(userMoney)
                     dashboardUserMoneyBalanceText.text = formatDecimal(sumOfMoneyBalance.toString())
                 }
+
+                // https://youtu.be/Vy_4sZ6JVHM 3:42 duration .
 
             } catch (error: Exception) {
                 when (error) { // This is Kotlin's multi-catch handling

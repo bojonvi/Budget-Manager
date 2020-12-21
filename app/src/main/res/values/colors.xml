@@ -16,4 +16,6 @@
     <color name="screenBackground">#E0ECFF</color>
     <color name="declineRed">#CE435C</color>
     <color name="bluish">#73A8E9</color>
+    <color name="bluish_light">#91C2FF</color>
+    <color name="field_gray">#333331</color>
 </resources>

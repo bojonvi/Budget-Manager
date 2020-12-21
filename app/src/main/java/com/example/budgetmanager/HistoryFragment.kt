@@ -1,10 +1,13 @@
 package com.example.budgetmanager
 
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,11 +39,13 @@ class HistoryFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.history_fragment, container, false)
 
+        val historyFragmentLayoutTabFrameLayout: FrameLayout = view.findViewById(R.id.historyFragmentLayoutTab)
 
         val textViewHistoryList = view.findViewById<TextView>(R.id.textViewSampleDismissHistory)
 
         textViewHistoryList.setOnClickListener {
             textViewHistoryList.visibility = View.GONE // when click it will be gone
+            historyFragmentLayoutTabFrameLayout.setBackgroundColor(Color.TRANSPARENT)
         }
 
 
