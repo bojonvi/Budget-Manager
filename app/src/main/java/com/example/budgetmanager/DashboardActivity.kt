@@ -222,7 +222,6 @@ class DashboardActivity : AppCompatActivity() {
         val dashboard_MainFrameLinearLayout = findViewById<LinearLayout>(R.id.dashboard_MainFrameLinearLayout)
         val layoutBudgetCard = LinearLayout(this)
         layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
-        layoutBudgetCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
         val layoutInfoCard = LinearLayout(this)
         layoutInfoCard.orientation = LinearLayout.VERTICAL
         layoutInfoCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
