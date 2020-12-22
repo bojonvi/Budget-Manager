@@ -7,7 +7,7 @@
 
 ## Project Updates
 ```bash
-DECEMBER 22, 2020 : 12:200PM(noon)
+DECEMBER 22, 2020 : 12:00PM(noon)
 - Added Back Image Button in Create_Budget_Activity
 - Animation added when switching activiies
 - Logic improved in Adding Money
