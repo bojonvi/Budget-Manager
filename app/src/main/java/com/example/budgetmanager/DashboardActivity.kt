@@ -241,6 +241,8 @@ class DashboardActivity : AppCompatActivity() {
             // Initialize Card Layout Views
             val layoutBudgetCard = LinearLayout(this)
             layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
+            layoutBudgetCard.setBackgroundResource(R.drawable.card_background)
+            layoutBudgetCard.setPadding(50,50,50,50)
             val budgetCardParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
             budgetCardParams.setMargins(20,20,20,20)
             layoutBudgetCard.layoutParams = budgetCardParams
