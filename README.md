@@ -7,6 +7,14 @@
 
 ## Project Updates
 ```bash
+DECEMBER 22, 2020 : 12:200PM(noon)
+- Added Back Image Button in Create_Budget_Activity
+- Animation added when switching activiies
+- Logic improved in Adding Money
+- Rearranged Dashboard Layout
+- Temporarily disable Fragment activities in Dashboard
+```
+```bash
 DECEMBER 20, 2020 : 02:24PM
 - Added Dialog Box for Adding Money in Dashboard
 - Added Settings Activity Layout
