@@ -74,7 +74,7 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
         return read
     }
 
-    fun addMoney(userMoney: String): Boolean{
+    fun updateMoney(userMoney: String): Boolean{
         val db: SQLiteDatabase = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(USER_MONEY, userMoney)
@@ -97,14 +97,20 @@ class DatabaseHelper(context: Context): SQLiteOpenHelper(context, DATABASE_NAME,
 
     fun readBudget(): Cursor {
         val db: SQLiteDatabase = this.writableDatabase
-        val read: Cursor = db.rawQuery("SELECT * FROM $BUDGET_TABLE ORDER BY $BUDGET_TITLE ASC", null)
+        val read: Cursor = db.rawQuery("SELECT * FROM $BUDGET_TABLE WHERE $BUDGET_STATUS='pending' ORDER BY $BUDGET_TITLE ASC", null)
         return read
     }
 
-    fun updateBudget(budgetID: String) {
+    fun readBudgetHistory(): Cursor {
+        val db: SQLiteDatabase = this.writableDatabase
+        val read: Cursor = db.rawQuery("SELECT * FROM $BUDGET_TABLE WHERE $BUDGET_STATUS!='pending' ORDER BY $BUDGET_TITLE ASC", null)
+        return read
+    }
+
+    fun updateBudget(budgetID: String, budgetStatus: String) {
         val db: SQLiteDatabase = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(BUDGET_STATUS, "finished")
+        contentValues.put(BUDGET_STATUS, budgetStatus)
         db.update(BUDGET_TABLE, contentValues, "${BaseColumns._ID}=?", arrayOf(budgetID))
         db.close()
     }

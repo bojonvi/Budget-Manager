@@ -46,23 +46,9 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Data
-        userData = databaseHelper.userAccount()
-        while (userData.moveToNext()) {
-            userMoney = userData.getString((2))
-        }
-        availableMoney = (userMoney.toFloat()).toString()
 
-
-        // Available Balance Data
-        budgetData = databaseHelper.readBudget()
-        while (budgetData.moveToNext()) {
-            availableMoney =
-                (availableMoney.toFloat() - budgetData.getString((2)).toFloat()).toString()
-        }
-        accountTextView.text = formatDecimal(availableMoney)
-
-//        budgetListFragment()
+        // Loads Budget List and User Account
+        budgetListShow()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -124,22 +110,6 @@ class DashboardActivity : AppCompatActivity() {
             helpPopupMenu.show()
         } // dashboardHelpButtonTapped.setOnClickListener() Code
 
-//        val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
-//        settingsButtonTapped.setOnClickListener {
-//            goToSettingsActivity()
-//        }
-
-
-        // Fragments
-//        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
-//        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
-//        dashboardBudgetListFragmentTapped.setOnClickListener {
-//            budgetListFragment()
-//        }
-//        dashboardHistoryFragmentTapped.setOnClickListener {
-//            historyListFragment()
-//        }
-
     } // fun onCreate() Code
 
     private fun goToSettingsActivity() {
@@ -186,7 +156,7 @@ class DashboardActivity : AppCompatActivity() {
                 } else if (sumOfMoneyBalance > 100000) {
                     val totalSumBalanceWarningToastMessage = Toast.makeText(
                         this,
-                        "The Money Balance should not exceed mroe than 100,000PHP",
+                        "The Money Balance should not exceed more than 100,000PHP",
                         Toast.LENGTH_SHORT
                     )
                     totalSumBalanceWarningToastMessage.setGravity(Gravity.CENTER, 0, 0)
@@ -196,7 +166,7 @@ class DashboardActivity : AppCompatActivity() {
                     // and inputted money is not over 100,000PHP, then add money
                 } else {
                     userMoney = "%.2f".format(sumOfMoneyBalance)
-                    databaseHelper.addMoney(userMoney)
+                    databaseHelper.updateMoney(userMoney)
                     availableMoney = (availableMoney.toFloat() + inputtedMoney.toFloat()).toString()
                     dashboardUserMoneyBalanceText.text = formatDecimal(availableMoney)
                 }
@@ -239,39 +209,82 @@ class DashboardActivity : AppCompatActivity() {
         return df.format(java.lang.Double.valueOf(value!!))
     } // fun formatDecimal() Code
 
-//    private fun budgetListFragment(){
-//        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
-//        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
-//
-//        // Switch to Fragment 1 = Budget List Activity Pane
-//        dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT_BOLD
-//        dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT
-//        val firstFragment = BudgetListFragment() // get the Fragment Instance
-//        val manager = supportFragmentManager // Get the Support Fragment manager Instance
-//        val transactionManager =
-//            manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
-//
-//        // Replace Fragment in the Container and Finish Transaction
-//        transactionManager.replace(R.id.dashboardMainFragment, firstFragment)
-//        transactionManager.addToBackStack(null)
-//        transactionManager.commit()
-//    }
-//
-//    private fun historyListFragment(){
-//        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
-//        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
-//
-//        // Switch to Fragment 2 = History Activity Pane
-//        dashboardHistoryFragmentTapped.typeface = Typeface.DEFAULT_BOLD
-//        dashboardBudgetListFragmentTapped.typeface = Typeface.DEFAULT
-//        val secondFragment = HistoryFragment() // get the Fragment Instance
-//        val manager = supportFragmentManager // Get the Support Fragment manager Instance
-//        val transactionManager =
-//            manager.beginTransaction() // Begin the Fragment Transaction using Fragment Manager
-//
-//        // Replace Fragment in the Container and Finish Transaction
-//        transactionManager.replace(R.id.dashboardMainFragment, secondFragment)
-//        transactionManager.addToBackStack(null)
-//        transactionManager.commit()
-//    }
+    private fun userDataLoad(){
+        userData = databaseHelper.userAccount()
+        while (userData.moveToNext()) {
+            userMoney = userData.getString((2))
+        }
+        availableMoney = (userMoney.toFloat()).toString()
+    }
+
+    private fun budgetListShow(){
+        // Layout views
+        val dashboard_MainFrameLinearLayout = findViewById<LinearLayout>(R.id.dashboard_MainFrameLinearLayout)
+        val layoutBudgetCard = LinearLayout(this)
+        layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
+        layoutBudgetCard.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        val layoutInfoCard = LinearLayout(this)
+        layoutInfoCard.orientation = LinearLayout.VERTICAL
+        layoutInfoCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
+        val layoutActionCard = LinearLayout(this)
+        layoutActionCard.orientation = LinearLayout.VERTICAL
+        layoutActionCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .3f)
+
+
+        // Resets the contents of the main layout
+        if (dashboard_MainFrameLinearLayout != null){
+            dashboard_MainFrameLinearLayout.removeAllViews()
+        }
+
+        // Loads the data (USER and BUDGET) from database
+        userDataLoad()
+        budgetData = databaseHelper.readBudget()
+        while (budgetData.moveToNext()) {
+            // Budget Data
+            val budgetID = budgetData.getString(0)
+            val budgetTitle = budgetData.getString(1)
+            val budgetMoney = budgetData.getString(2)
+            val budgetDescription = budgetData.getString(3)
+            availableMoney =
+                (availableMoney.toFloat() - budgetMoney.toFloat()).toString()
+
+            // Initialize InfoCard Content Views
+            val budgetTitleTextView = TextView(this)
+            budgetTitleTextView.text = "Title: " + budgetTitle
+            budgetTitleTextView.textSize = 20f
+            val budgetMoneyTextView = TextView(this)
+            budgetMoneyTextView.text = "PHP " + formatDecimal(budgetMoney)
+            budgetMoneyTextView.textSize = 15f
+
+            // Initialize ActionCard Content Views
+            val budgetFinishButton = Button(this)
+            budgetFinishButton.text = "Finish"
+            budgetFinishButton.textSize = 20f
+            budgetFinishButton.setOnClickListener{
+                databaseHelper.updateBudget(budgetID, "finish")
+                databaseHelper.updateMoney((userMoney.toFloat() - budgetMoney.toFloat()).toString())
+                budgetListShow()
+            }
+            val budgetRevokeButton = Button(this)
+            budgetRevokeButton.text = "Revoke"
+            budgetRevokeButton.textSize = 20f
+            budgetRevokeButton.setOnClickListener{
+                databaseHelper.updateBudget(budgetID, "revoked")
+                budgetListShow()
+            }
+
+            // Add content views to layout
+            layoutInfoCard.addView(budgetTitleTextView)
+            layoutInfoCard.addView(budgetMoneyTextView)
+            layoutActionCard.addView(budgetFinishButton)
+            layoutActionCard.addView(budgetRevokeButton)
+        }
+
+        // Creates and add Budget Card to main layout
+        layoutBudgetCard.addView(layoutInfoCard)
+        layoutBudgetCard.addView(layoutActionCard)
+        dashboard_MainFrameLinearLayout.addView(layoutBudgetCard)
+
+        accountTextView.text = formatDecimal(availableMoney)
+    }
 }
