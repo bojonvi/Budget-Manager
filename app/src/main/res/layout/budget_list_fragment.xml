@@ -12,6 +12,7 @@
         android:id="@+id/budgetListLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/transparent"
         android:orientation="vertical">
 
         <TextView
@@ -19,13 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/bluish"
-            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/card_background"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center_vertical"
             android:padding="10dp"
-            android:text="Tap this to dismiss this BUDGET LIST TextView\nFragment Background is set to transparent.\n\n\nTextView lang ito, hindi to actual card..."
-            android:textColor="@color/cornsilk"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="To center this Budget card, follow the format of this TextView in xml file"
+            android:textColor="@color/screenBackground"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
 

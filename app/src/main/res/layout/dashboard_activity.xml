@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/dashboard_background"
     android:layoutDirection="ltr"
+    android:screenOrientation="portrait"
     tools:context=".DashboardActivity">
 
     <!-- Default Layout of the App is decided to be Left-To-Right -->
@@ -40,9 +41,9 @@
         android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center"
         android:text="@string/money_balance"
         android:textColor="@color/white"
         android:textSize="26sp"
@@ -56,7 +57,7 @@
         android:id="@+id/dashboard_phpTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="5dp"
         android:text="@string/php"
         android:textColor="@color/white"
@@ -72,9 +73,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/ubuntu"
         android:text="@string/available_balance"
         android:textColor="@color/white"
-        android:fontFamily="@font/ubuntu"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,14 +85,12 @@
         android:id="@+id/dashboard_addMoneyDialogButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/ic_add_circle"
         android:backgroundTint="@color/black"
         android:onClick="showAddMoneyAlert"
         app:layout_constraintBottom_toTopOf="@+id/dashboard_helpButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.276"
         app:layout_constraintStart_toEndOf="@+id/dashboard_userMoneyBalance"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner"
         app:layout_constraintVertical_bias="0.0" />
@@ -103,40 +102,34 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/roundedbutton_blue"
-        android:drawableLeft="@drawable/ic_add_circle"
         android:text="@string/create_budget"
+        android:textAllCaps="true"
+        android:textSize="12sp"
+        app:icon="@drawable/ic_add_circle"
+        app:iconGravity="textStart"
+        app:iconPadding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/divider_separator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
         app:layout_constraintVertical_bias="0.0" />
+    <!--        style="@style/Widget.MaterialComponents.Button.TextButton.Dialog"-->
 
 
-    <Button
-        android:id="@+id/dashboard_settingsButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/ic_settings_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider_separator"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
-        app:layout_constraintVertical_bias="0.317" />
-
-    <Button
+    <ImageView
         android:id="@+id/dashboard_helpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/roundedbutton_blue"
-        android:drawableLeft="@drawable/ic_help_24dp"
-        android:text="@string/help"
-        app:layout_constraintBottom_toTopOf="@+id/divider_separator"
-        app:layout_constraintEnd_toStartOf="@+id/dashboard_settingsButton"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/ic_help_24dp"
+        android:backgroundTint="@color/bluish_light"
+        android:contentDescription="@string/help"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutSelectTab"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_createBudgetButton"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView"
-        app:layout_constraintVertical_bias="0.058" />
-
+        app:layout_constraintVertical_bias="0.366" />
 
     <LinearLayout
         android:id="@+id/linearLayoutSelectTab"
@@ -152,27 +145,36 @@
         <Button
             android:id="@+id/dashboard_budgetListTab"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
+            android:layout_weight="2"
+            android:background="@android:color/white"
+            android:fontFamily="@font/ubuntu"
+            android:paddingStart="75dp"
+            android:paddingEnd="0dp"
             android:text="@string/budget_list"
+            android:textAlignment="textStart"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:fontFamily="@font/ubuntu"
             app:layout_constraintEnd_toStartOf="@+id/dashboard_historyTabButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider_separator" />
+
+        <View
+            android:id="@+id/divider_separator_inbetween"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/listDivider" />
 
         <Button
             android:id="@+id/dashboard_historyTabButton"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:fontFamily="@font/ubuntu"
             android:gravity="center"
             android:text="@string/history"
-            android:fontFamily="@font/ubuntu"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -180,10 +182,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dashboardMainFragment"
+        android:id="@+id/dashboardBudgetListLayout"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="0dp"
         android:baselineAligned="false"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:weightSum="1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -191,12 +194,16 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutSelectTab"
         app:layout_constraintVertical_bias="0.0">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/budgetListFragmentId"
-            android:name="com.example.budgetmanager.BudgetListFragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+        <!-- DITO I-DISPLAY ANG GENERATED BUDGETS -->
+
+        <!--        <androidx.fragment.app.FragmentContainerView-->
+        <!--            android:id="@+id/budgetListFragmentId"-->
+        <!--            android:name="com.example.budgetmanager.BudgetListFragment"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_weight="1" />-->
+
+
     </LinearLayout>
 
 

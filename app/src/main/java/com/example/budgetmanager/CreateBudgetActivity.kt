@@ -1,5 +1,6 @@
 package com.example.budgetmanager
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -25,6 +26,7 @@ class CreateBudgetActivity : AppCompatActivity() {
             findViewById(R.id.createBudgetDescriptionField)
         val createBudgetMoneyField: EditText =
             findViewById(R.id.createBudgetMoneyField)
+
 
         // UI Modification
         createBudgetAvailableBalance.text = availableMoney
@@ -57,6 +59,12 @@ class CreateBudgetActivity : AppCompatActivity() {
                     createBudgetMoneyField.error = "Incorrect Money Input"
                 }
             }
+        }
+
+        // Back Function
+        findViewById<ImageView>(R.id.backImageButton).setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         }
 
     }

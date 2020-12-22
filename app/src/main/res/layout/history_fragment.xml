@@ -18,13 +18,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@color/bluish"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/card_background"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center_vertical"
             android:padding="10dp"
-            android:gravity="center"
-            android:text="Tap this to dismiss this HISTORY Fragment TextView\nFragment Background is set to transparent.\nTextView lang ito, hindi to actual card..."
-            android:textColor="@color/cornsilk"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="To center this History card, follow the format of this TextView in xml file"
+            android:textColor="@color/screenBackground"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 

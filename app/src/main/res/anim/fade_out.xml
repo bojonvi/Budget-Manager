@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <alpha
-        android:duration="2000"
+        android:duration="280"
         android:fromAlpha="1"
         android:toAlpha="0" />
 </set>
-    <!-- 2 seconds fade out time -->
+    <!-- 0.280 seconds fade out time -->
