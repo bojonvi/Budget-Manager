@@ -126,14 +126,14 @@ class DashboardActivity : AppCompatActivity() {
 
 
         // Fragments
-        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
-        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
-        dashboardBudgetListFragmentTapped.setOnClickListener {
+//        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)
+//        val dashboardHistoryFragmentTapped: Button = findViewById(R.id.dashboard_historyTabButton)
+//        dashboardBudgetListFragmentTapped.setOnClickListener {
 //            budgetListFragment()
-        }
-        dashboardHistoryFragmentTapped.setOnClickListener {
+//        }
+//        dashboardHistoryFragmentTapped.setOnClickListener {
 //            historyListFragment()
-        }
+//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

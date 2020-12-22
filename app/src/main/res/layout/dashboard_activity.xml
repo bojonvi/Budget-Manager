@@ -181,30 +181,45 @@
             app:layout_constraintTop_toBottomOf="@+id/divider_separator" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/dashboardBudgetListLayout"
+    <ScrollView
+        android:id="@+id/dashboardBudgetListScrollLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:baselineAligned="false"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:weightSum="1"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSelectTab"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutSelectTab">
+        <!-- Vertical orientation , kasi i-scroll sya up-and-down -->
 
-        <!-- DITO I-DISPLAY ANG GENERATED BUDGETS -->
+        <LinearLayout
+            android:id="@+id/dashboardBudgetListLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:weightSum="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutSelectTab"
+            app:layout_constraintVertical_bias="0.0">
 
-        <!--        <androidx.fragment.app.FragmentContainerView-->
-        <!--            android:id="@+id/budgetListFragmentId"-->
-        <!--            android:name="com.example.budgetmanager.BudgetListFragment"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_weight="1" />-->
+            <!-- DITO I-DISPLAY ANG GENERATED BUDGETS PARA MA-SCROLL -->
+            <!-- nasa loob ng Scroll View, para ma-vertical scroll ang Linear Layout -->
+
+            <!--        <androidx.fragment.app.FragmentContainerView-->
+            <!--            android:id="@+id/budgetListFragmentId"-->
+            <!--            android:name="com.example.budgetmanager.BudgetListFragment"-->
+            <!--            android:layout_width="0dp"-->
+            <!--            android:layout_height="match_parent"-->
+            <!--            android:layout_weight="1" />-->
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
