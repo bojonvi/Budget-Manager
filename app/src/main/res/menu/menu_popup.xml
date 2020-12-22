@@ -5,9 +5,11 @@
 
     <item
         android:id="@+id/howToUseAppOption"
+        android:icon="@drawable/ic_help_24dp"
         android:title="@string/how_to_use" />
     <item
         android:id="@+id/privacyPolicyOption"
+        android:icon="@drawable/ic_privacy_policy_24dp"
         android:title="@string/privacy_policy" />
 
     <item

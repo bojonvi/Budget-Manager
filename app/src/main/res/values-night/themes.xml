@@ -17,4 +17,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/bluish</item>
+        <item name="colorPrimaryVariant">#242424</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryDark">#242424</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
+
+    </style>
 </resources>

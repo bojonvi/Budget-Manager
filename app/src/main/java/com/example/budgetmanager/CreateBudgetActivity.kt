@@ -43,7 +43,7 @@ class CreateBudgetActivity : AppCompatActivity() {
             // Input Checker
             try{
                 createBudgetMoneyFieldFloat = createBudgetMoneyField.text.toString().toFloat()
-                Toast.makeText(this, createBudgetTitleFieldString, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, createBudgetTitleFieldString, Toast.LENGTH_SHORT).show()
                 if (createBudgetTitleFieldString.isEmpty()){
                     createBudgetTitleField.error = "Title must not be empty!"
                 } else if (createBudgetMoneyFieldFloat > availableMoney!!.toFloat()){
@@ -54,7 +54,7 @@ class CreateBudgetActivity : AppCompatActivity() {
                 }
             } catch (e: Exception){
                 if (createBudgetMoneyField.text.toString().isEmpty()){
-                    createBudgetMoneyField.error = "No Money Input"
+                    createBudgetMoneyField.error = "No Money Inputted"
                 } else {
                     createBudgetMoneyField.error = "Incorrect Money Input"
                 }

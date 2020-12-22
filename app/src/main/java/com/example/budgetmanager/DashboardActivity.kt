@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat
 import com.example.budgetmanager.R.drawable.ic_add_dialog
 import com.example.budgetmanager.R.drawable.ic_cancel_dialog
 import com.example.budgetmanager.database.DatabaseHelper
+import java.lang.reflect.Field
 import java.text.DecimalFormat
 
 class DashboardActivity : AppCompatActivity() {
@@ -108,6 +109,26 @@ class DashboardActivity : AppCompatActivity() {
 
             }) // helpPopupMenu.setOnMenuItemClickListener({ }) Code
             helpPopupMenu.show()
+
+
+            dashboardHelpButtonTapped.setOnLongClickListener {
+                try {
+                    val longPopup = helpPopupMenu::class.java.getDeclaredField("mPopup")
+                    longPopup.isAccessible = true
+                    val getMenuInLongPopup = longPopup.get(helpPopupMenu)
+                    getMenuInLongPopup.javaClass.getDeclaredMethod(
+                        "setForceShowIcon", Boolean::class.java
+                    )
+                        .invoke(getMenuInLongPopup, true)
+                } catch (e: java.lang.Exception) {
+                    e.printStackTrace()
+                } finally {
+                    helpPopupMenu.show()
+                }
+
+                true
+            }
+
         } // dashboardHelpButtonTapped.setOnClickListener() Code
 
     } // fun onCreate() Code
@@ -209,7 +230,7 @@ class DashboardActivity : AppCompatActivity() {
         return df.format(java.lang.Double.valueOf(value!!))
     } // fun formatDecimal() Code
 
-    private fun userDataLoad(){
+    private fun userDataLoad() {
         userData = databaseHelper.userAccount()
         while (userData.moveToNext()) {
             userMoney = userData.getString((2))
@@ -217,12 +238,13 @@ class DashboardActivity : AppCompatActivity() {
         availableMoney = (userMoney.toFloat()).toString()
     }
 
-    private fun budgetListShow(){
+    private fun budgetListShow() {
         // Layout views
-        val dashboard_MainFrameLinearLayout = findViewById<LinearLayout>(R.id.dashboard_MainFrameLinearLayout)
+        val dashboard_MainFrameLinearLayout =
+            findViewById<LinearLayout>(R.id.dashboard_MainFrameLinearLayout)
 
         // Resets the contents of the main layout
-        if (dashboard_MainFrameLinearLayout != null){
+        if (dashboard_MainFrameLinearLayout != null) {
             dashboard_MainFrameLinearLayout.removeAllViews()
         }
 
@@ -242,16 +264,21 @@ class DashboardActivity : AppCompatActivity() {
             val layoutBudgetCard = LinearLayout(this)
             layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
             layoutBudgetCard.setBackgroundResource(R.drawable.card_background)
-            layoutBudgetCard.setPadding(50,50,50,50)
-            val budgetCardParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
-            budgetCardParams.setMargins(20,20,20,20)
+            layoutBudgetCard.setPadding(50, 50, 50, 50)
+            val budgetCardParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            budgetCardParams.setMargins(20, 20, 20, 20)
             layoutBudgetCard.layoutParams = budgetCardParams
             val layoutInfoCard = LinearLayout(this)
             layoutInfoCard.orientation = LinearLayout.VERTICAL
-            layoutInfoCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
+            layoutInfoCard.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
             val layoutActionCard = LinearLayout(this)
             layoutActionCard.orientation = LinearLayout.VERTICAL
-            layoutActionCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .3f)
+            layoutActionCard.layoutParams =
+                LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .3f)
 
             // Initialize InfoCard Content Views
             val budgetTitleTextView = TextView(this)
@@ -265,7 +292,7 @@ class DashboardActivity : AppCompatActivity() {
             val budgetFinishButton = Button(this)
             budgetFinishButton.text = "Finish"
             budgetFinishButton.textSize = 15f
-            budgetFinishButton.setOnClickListener{
+            budgetFinishButton.setOnClickListener {
                 databaseHelper.updateBudget(budgetID, "finish")
                 databaseHelper.updateMoney((userMoney.toFloat() - budgetMoney.toFloat()).toString())
                 budgetListShow()
@@ -273,7 +300,7 @@ class DashboardActivity : AppCompatActivity() {
             val budgetRevokeButton = Button(this)
             budgetRevokeButton.text = "Revoke"
             budgetRevokeButton.textSize = 15f
-            budgetRevokeButton.setOnClickListener{
+            budgetRevokeButton.setOnClickListener {
                 databaseHelper.updateBudget(budgetID, "revoked")
                 budgetListShow()
             }
