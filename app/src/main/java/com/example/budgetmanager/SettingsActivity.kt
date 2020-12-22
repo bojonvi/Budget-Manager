@@ -1,83 +1,56 @@
 package com.example.budgetmanager
 
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+import android.view.View
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 
-class SettingsActivity : AppCompatActivity(),
-    PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+class SettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.settings_activity)
+        setContentView(R.layout.app_settings_activity)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.content_preference, MainSettingsPreference()).commit()
-        } else {
-            title = savedInstanceState.getCharSequence(TAG_TITLE)
+        // Variables
+        val switchNightMode: SwitchCompat = findViewById(R.id.switchNightMode)
+        val linearLayoutForNightMode: LinearLayout = findViewById(R.id.linearLayoutForNightMode)
+
+        // Don’t forget that the system theme only supports the Android Pie (9.0) version,
+        // so you need to remove the system theme option from UI for previous Android versions.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) // Android Pie or Above
+        {
+            linearLayoutForNightMode.visibility = View.VISIBLE
+        } else if (Build.VERSION.SDK_INT <=  27) // Android Oreo or below
+        {
+            linearLayoutForNightMode.visibility = View.GONE
         }
 
-        supportFragmentManager.addOnBackStackChangedListener {
-            if (supportFragmentManager.backStackEntryCount == 0) {
-                setTitle(R.string.settings)
+
+        // Night Mode Activation Code
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
+
+
+        var currentThemeMode = AppCompatDelegate.getDefaultNightMode()
+        switchNightMode.isChecked = currentThemeMode == AppCompatDelegate.MODE_NIGHT_YES
+
+        switchNightMode.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                restartCurrentActivity()
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                restartCurrentActivity()
             }
-        }
+        } // switchNightMode setOnCheckedChangeLister Code
+    } // onCreate Code
 
-        setUpToolbar()
+    private fun restartCurrentActivity() {
+        startActivity(Intent(this, this::class.java))
+        finish()
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
 
-    }
-
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
-        outState.putCharSequence(TAG_TITLE, title)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        if (supportFragmentManager.popBackStackImmediate()) {
-            return true
-        }
-        return super.onSupportNavigateUp()
-    }
-
-    private fun setUpToolbar() {
-        supportActionBar?.setTitle(R.string.settings)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-    }
-
-    class MainSettingsPreference : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.main_preference, rootKey)
-
-        }
-    }
-
-
-    override fun onPreferenceStartFragment(
-        caller: PreferenceFragmentCompat?,
-        pref: Preference?
-    ): Boolean {
-
-        // Initiate the new fragment
-        val args = pref?.extras
-        val fragment = pref?.fragment?.let {
-            supportFragmentManager.fragmentFactory.instantiate(classLoader, it).apply {
-                arguments = args
-                setTargetFragment(caller, 0)
-            }
-        }
-
-        fragment?.let {
-            supportFragmentManager.beginTransaction().replace(R.id.content_preference, it)
-                .addToBackStack(null).commit()
-        }
-        title = pref?.title
-        return true
-    }
-
-    companion object {
-        private val TAG_TITLE = "PREFERENCE_ACTIVITY"
-    }
+    } // restartCurrentActivity Code
 }

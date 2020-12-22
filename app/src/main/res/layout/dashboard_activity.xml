@@ -7,6 +7,8 @@
     android:background="@drawable/dashboard_background"
     android:layoutDirection="ltr"
     android:screenOrientation="portrait"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".DashboardActivity">
 
     <!-- Default Layout of the App is decided to be Left-To-Right -->
@@ -182,7 +184,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/dashboardBudgetListScrollLayout"
+        android:id="@+id/dashboard_MainFrameScrollLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -193,7 +195,7 @@
         <!-- Vertical orientation , kasi i-scroll sya up-and-down -->
 
         <LinearLayout
-            android:id="@+id/dashboardBudgetListLinearLayout"
+            android:id="@+id/dashboard_MainFrameLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:baselineAligned="false"

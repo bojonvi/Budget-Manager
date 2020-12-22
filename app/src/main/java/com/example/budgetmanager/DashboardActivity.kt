@@ -57,7 +57,8 @@ class DashboardActivity : AppCompatActivity() {
         // Available Balance Data
         budgetData = databaseHelper.readBudget()
         while (budgetData.moveToNext()) {
-            availableMoney = (availableMoney.toFloat() - budgetData.getString((2)).toFloat()).toString()
+            availableMoney =
+                (availableMoney.toFloat() - budgetData.getString((2)).toFloat()).toString()
         }
         accountTextView.text = formatDecimal(availableMoney)
 
@@ -75,7 +76,8 @@ class DashboardActivity : AppCompatActivity() {
 
 
         // Buttons
-        val dashboardCreateBudgetActivityTapped: Button = findViewById(R.id.dashboard_createBudgetButton)
+        val dashboardCreateBudgetActivityTapped: Button =
+            findViewById(R.id.dashboard_createBudgetButton)
         dashboardCreateBudgetActivityTapped.setOnClickListener {
             val activity = Intent(this, CreateBudgetActivity::class.java)
             activity.putExtra("availableMoney", availableMoney)
@@ -92,12 +94,13 @@ class DashboardActivity : AppCompatActivity() {
                     when (item!!.itemId) {
                         R.id.howToUseAppOption -> goToHowToUseApp()
                         R.id.privacyPolicyOption -> goToPrivacyPolicy()
+                        R.id.settingsOption -> goToSettingsActivity()
                     }
                     return true
                 }
 
                 private fun goToPrivacyPolicy() {
-                    startActivity( Intent(this@DashboardActivity, PrivacyPolicy::class.java))
+                    startActivity(Intent(this@DashboardActivity, PrivacyPolicy::class.java))
                     overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
                 }
 
@@ -106,18 +109,20 @@ class DashboardActivity : AppCompatActivity() {
 //                        Intent(this@DashboardActivity, SettingsActivity::class.java)
 //                    startActivity(howToUseAppIntent)
 //                    overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
-                    val maintenanceInformationAlertDialog = AlertDialog.Builder(this@DashboardActivity)
+                    val maintenanceInformationAlertDialog =
+                        AlertDialog.Builder(this@DashboardActivity)
                     maintenanceInformationAlertDialog.setTitle("Not yet accessible")
                     maintenanceInformationAlertDialog.setMessage("Instructions on How to use iBudget will be available soon.")
                     maintenanceInformationAlertDialog.setCancelable(true) // can cancel on outside touch of dialog
-                    maintenanceInformationAlertDialog.setPositiveButton("Okay") {_, _ -> return@setPositiveButton}
-                    val maintenanceInformationAlertDialogShow = maintenanceInformationAlertDialog.create()
+                    maintenanceInformationAlertDialog.setPositiveButton("Okay") { _, _ -> return@setPositiveButton }
+                    val maintenanceInformationAlertDialogShow =
+                        maintenanceInformationAlertDialog.create()
                     maintenanceInformationAlertDialogShow.show()
                 }
 
-            })
+            }) // helpPopupMenu.setOnMenuItemClickListener({ }) Code
             helpPopupMenu.show()
-        }
+        } // dashboardHelpButtonTapped.setOnClickListener() Code
 
 //        val settingsButtonTapped: Button = findViewById(R.id.dashboard_settingsButton)
 //        settingsButtonTapped.setOnClickListener {
@@ -134,25 +139,13 @@ class DashboardActivity : AppCompatActivity() {
 //        dashboardHistoryFragmentTapped.setOnClickListener {
 //            historyListFragment()
 //        }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        if (id == R.id.item_preference) {
-            goToSettingsActivity()
-        }
-        return super.onOptionsItemSelected(item)
-    }
+    } // fun onCreate() Code
 
     private fun goToSettingsActivity() {
         startActivity(Intent(this, SettingsActivity::class.java))
         overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
-    }
+    } // fun goToSettingsActivity() Code
 
     fun showAddMoneyAlert(@Suppress("UNUSED_PARAMETER") view: View) {
         /* > avoid warning error that the (view: View) is never used, it is actually used to
@@ -222,13 +215,13 @@ class DashboardActivity : AppCompatActivity() {
                         numberFormatExceptionToast.setGravity(Gravity.CENTER, 0, 0)
                         numberFormatExceptionToast.show()
                         return@setPositiveButton
-                    }
+                    } // is NullPointerException, is NumberFormatException, is FormatException  Code
                     else -> {
                         throw error
                     }
-                }
-            }
-        }
+                } // when (error) Code
+            } //  catch (error: Exception) Code
+        } //  addMoneyAlertDialog.setPositiveButton("Add") Code
         if (userMoney.toFloat() >= 100000) {
             Toast.makeText(
                 this,
@@ -239,12 +232,12 @@ class DashboardActivity : AppCompatActivity() {
             val addMoneyDialogBox = addMoneyAlertDialog.create()
             addMoneyDialogBox.show()
         }
-    }
+    } // fun showAddMoneyAlert() Code
 
     private fun formatDecimal(value: String?): String? {
         val df = DecimalFormat("#,###,##0.00")
         return df.format(java.lang.Double.valueOf(value!!))
-    }
+    } // fun formatDecimal() Code
 
 //    private fun budgetListFragment(){
 //        val dashboardBudgetListFragmentTapped: Button = findViewById(R.id.dashboard_budgetListTab)

@@ -2,7 +2,8 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <alpha
         android:duration="280"
+        android:fillAfter="true"
         android:fromAlpha="1"
+        android:interpolator="@android:anim/accelerate_interpolator"
         android:toAlpha="0" />
-</set>
-    <!-- 0.280 seconds fade out time -->
+</set><!-- 0.280 seconds fade out time -->

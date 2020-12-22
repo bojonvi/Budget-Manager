@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.budgetmanager.DashboardActivity">
 
     <item
         android:id="@+id/howToUseAppOption"
@@ -7,5 +9,10 @@
     <item
         android:id="@+id/privacyPolicyOption"
         android:title="@string/privacy_policy" />
+
+    <item
+        android:id="@+id/settingsOption"
+        android:icon="@drawable/ic_settings_24dp"
+        android:title="@string/action_settings" />
 
 </menu>

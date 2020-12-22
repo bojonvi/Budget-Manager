@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.budgetmanager">
+    package="com.example.budgetmanager" >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,16 +12,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.BudgetManager">
-        <activity android:name=".CreateBudgetActivity"></activity>
+        android:theme="@style/Theme.BudgetManager" >
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:configChanges="uiMode">
+        </activity>
+        <activity android:name=".CreateBudgetActivity" />
         <activity
             android:name=".PrivacyPolicy"
             android:label="@string/title_activity_privacy_policy"
             android:theme="@style/Theme.BudgetManager.NoActionBar" />
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".DashboardActivity">
+        <activity android:name=".DashboardActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
