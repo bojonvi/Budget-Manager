@@ -220,15 +220,6 @@ class DashboardActivity : AppCompatActivity() {
     private fun budgetListShow(){
         // Layout views
         val dashboard_MainFrameLinearLayout = findViewById<LinearLayout>(R.id.dashboard_MainFrameLinearLayout)
-        val layoutBudgetCard = LinearLayout(this)
-        layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
-        val layoutInfoCard = LinearLayout(this)
-        layoutInfoCard.orientation = LinearLayout.VERTICAL
-        layoutInfoCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
-        val layoutActionCard = LinearLayout(this)
-        layoutActionCard.orientation = LinearLayout.VERTICAL
-        layoutActionCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .3f)
-
 
         // Resets the contents of the main layout
         if (dashboard_MainFrameLinearLayout != null){
@@ -247,6 +238,19 @@ class DashboardActivity : AppCompatActivity() {
             availableMoney =
                 (availableMoney.toFloat() - budgetMoney.toFloat()).toString()
 
+            // Initialize Card Layout Views
+            val layoutBudgetCard = LinearLayout(this)
+            layoutBudgetCard.orientation = LinearLayout.HORIZONTAL
+            val budgetCardParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+            budgetCardParams.setMargins(20,20,20,20)
+            layoutBudgetCard.layoutParams = budgetCardParams
+            val layoutInfoCard = LinearLayout(this)
+            layoutInfoCard.orientation = LinearLayout.VERTICAL
+            layoutInfoCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .7f)
+            val layoutActionCard = LinearLayout(this)
+            layoutActionCard.orientation = LinearLayout.VERTICAL
+            layoutActionCard.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, .3f)
+
             // Initialize InfoCard Content Views
             val budgetTitleTextView = TextView(this)
             budgetTitleTextView.text = "Title: " + budgetTitle
@@ -258,7 +262,7 @@ class DashboardActivity : AppCompatActivity() {
             // Initialize ActionCard Content Views
             val budgetFinishButton = Button(this)
             budgetFinishButton.text = "Finish"
-            budgetFinishButton.textSize = 20f
+            budgetFinishButton.textSize = 15f
             budgetFinishButton.setOnClickListener{
                 databaseHelper.updateBudget(budgetID, "finish")
                 databaseHelper.updateMoney((userMoney.toFloat() - budgetMoney.toFloat()).toString())
@@ -266,7 +270,7 @@ class DashboardActivity : AppCompatActivity() {
             }
             val budgetRevokeButton = Button(this)
             budgetRevokeButton.text = "Revoke"
-            budgetRevokeButton.textSize = 20f
+            budgetRevokeButton.textSize = 15f
             budgetRevokeButton.setOnClickListener{
                 databaseHelper.updateBudget(budgetID, "revoked")
                 budgetListShow()
@@ -277,12 +281,12 @@ class DashboardActivity : AppCompatActivity() {
             layoutInfoCard.addView(budgetMoneyTextView)
             layoutActionCard.addView(budgetFinishButton)
             layoutActionCard.addView(budgetRevokeButton)
-        }
 
-        // Creates and add Budget Card to main layout
-        layoutBudgetCard.addView(layoutInfoCard)
-        layoutBudgetCard.addView(layoutActionCard)
-        dashboard_MainFrameLinearLayout.addView(layoutBudgetCard)
+            // Creates and add Budget Card to main layout
+            layoutBudgetCard.addView(layoutInfoCard)
+            layoutBudgetCard.addView(layoutActionCard)
+            dashboard_MainFrameLinearLayout.addView(layoutBudgetCard)
+        }
 
         accountTextView.text = formatDecimal(availableMoney)
     }
