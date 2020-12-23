@@ -7,6 +7,13 @@
 
 ## Project Updates
 ```bash
+DECEMBER 23, 2020 : 11:41PM(noon)
+- Added Splashscreen
+- Added Login Activity (no functions yet)
+: 07:00PM
+𝐓𝐇𝐄 𝐌𝐀𝐈𝐍 𝐈𝐃𝐄𝐀 𝐀𝐍𝐃 𝐋𝐎𝐆𝐈𝐂 𝐅𝐋𝐎𝐖 𝐎𝐅 𝐓𝐇𝐄 𝐏𝐑𝐎𝐉𝐄𝐂𝐓 𝐈𝐒 𝐅𝐈𝐍𝐈𝐒𝐇𝐄𝐃.
+```
+```bash
 DECEMBER 22, 2020 : 12:00PM(noon)
 - Added Back Image Button in Create_Budget_Activity
 - Animation added when switching activiies
