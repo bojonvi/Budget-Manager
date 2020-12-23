@@ -13,7 +13,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val appLogoImageViewSplashScreen = findViewById<ImageView>(R.id.appLogoImageViewSplashScreen)
         appLogoImageViewSplashScreen.alpha = 0f
         appLogoImageViewSplashScreen.animate().setDuration(1000).alpha(1f).withEndAction {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
             finish()
 

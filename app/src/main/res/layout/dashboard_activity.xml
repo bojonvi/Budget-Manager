@@ -5,10 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dashboard_background"
+    android:gravity="center"
     android:layoutDirection="ltr"
     android:screenOrientation="portrait"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".DashboardActivity">
 
     <!-- Default Layout of the App is decided to be Left-To-Right -->
@@ -24,17 +23,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_availableBalanceTextView" />
 
-    <ImageView
-        android:id="@+id/dashboard_iBudget_Logo_Banner"
-        android:layout_width="match_parent"
+    <!--    <ImageView-->
+    <!--        android:id="@+id/dashboard_iBudget_Logo_Banner"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:contentDescription="@string/ibudget_logo_banner"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.498"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        app:srcCompat="@drawable/ibudget_logobanner_dashboard" />-->
+
+    <TextView
+        android:id="@+id/dashboard_iBudget_text_banner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:contentDescription="@string/ibudget_logo_banner"
+        android:fontFamily="@font/made_tommy_regular"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/bluish_light"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ibuget_dashboard_small_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ibudget_logobanner_dashboard" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/dashboard_userMoneyBalance"
@@ -53,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner" />
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_text_banner" />
 
     <TextView
         android:id="@+id/dashboard_phpTextView"
@@ -67,7 +84,7 @@
         app:layout_constraintEnd_toStartOf="@+id/dashboard_userMoneyBalance"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_text_banner"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -94,11 +111,12 @@
         android:onClick="showAddMoneyAlert"
         app:layout_constraintBottom_toTopOf="@+id/dashboard_helpButton"
         app:layout_constraintStart_toEndOf="@+id/dashboard_userMoneyBalance"
-        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_Logo_Banner"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iBudget_text_banner"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/dashboard_createBudgetButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -107,6 +125,7 @@
         android:text="@string/create_budget"
         android:textAllCaps="true"
         android:textSize="12sp"
+        app:backgroundTint="@null"
         app:icon="@drawable/ic_add_circle"
         app:iconGravity="textStart"
         app:iconPadding="10dp"
@@ -119,6 +138,7 @@
 
     <ImageView
         android:id="@+id/dashboard_helpButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="38dp"
         android:layout_height="38dp"
         android:layout_marginTop="12dp"

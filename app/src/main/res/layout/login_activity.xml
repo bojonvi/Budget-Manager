@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_desaturated_blue"
+    android:layoutDirection="ltr"
+    android:screenOrientation="portrait"
+    tools:context=".LoginActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="100dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ibudget_splashscreen_image" />
+
+    <View
+        android:id="@+id/viewAboveEmail"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@color/bluish_light"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutForEmailField"
+        tools:layout_editor_absoluteX="35dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutForEmailField"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="35dp"
+        android:background="@android:color/transparent"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_email_outlined_24dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/create_budget" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_emailField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:autofillHints="@string/email_address"
+            android:background="@null"
+            android:fontFamily="@font/made_tommy_regular"
+            android:hint="@string/email_address"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:maxLength="300"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:textColor="@color/cornsilk"
+            android:textColorHint="@color/white"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewInBetweenEmailPass"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@color/bluish_light"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForEmailField" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutForPasswordField"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@android:color/transparent"
+        android:elevation="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForEmailField">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/ic_password_outlined_24dp"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/create_budget" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:autofillHints="@string/password"
+            android:background="@null"
+            android:fontFamily="@font/made_tommy_regular"
+            android:hint="@string/password"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:maxLength="300"
+            android:singleLine="true"
+            android:padding="10dp"
+            android:textColor="@color/cornsilk"
+            android:textColorHint="@color/white"
+            android:textSize="18sp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/bluish_light"
+             />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewBelowPass"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:background="@color/bluish_light"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForPasswordField" />
+
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_width="160dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/login_activity_button"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/log_in"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewBelowPass"
+        app:layout_constraintVertical_bias="0.185" />
+
+
+    <ImageView
+        android:id="@+id/login_facebook_ImageButton"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="172dp"
+        android:background="@drawable/login_circle_button"
+        android:backgroundTint="@color/dark_desaturated_blue"
+        android:contentDescription="@string/facebook"
+        android:padding="5dp"
+        android:src="@drawable/ic_facebook_icon"
+        app:layout_constraintBottom_toTopOf="@+id/login_privacyPolicyButton"
+        app:layout_constraintStart_toEndOf="@+id/loginButton" />
+
+    <ImageView
+        android:id="@+id/login_google_ImageButton"
+        android:layout_width="62dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="172dp"
+        android:background="@drawable/login_circle_button"
+        android:backgroundTint="@color/dark_desaturated_blue"
+
+        android:contentDescription="@string/facebook"
+        android:padding="5dp"
+        android:src="@drawable/ic_google_icon"
+        app:layout_constraintBottom_toTopOf="@+id/login_privacyPolicyButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/login_facebook_ImageButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/login_privacyPolicyButton"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="176dp"
+        android:text="DATA PRIVACY POLICY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.87"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
