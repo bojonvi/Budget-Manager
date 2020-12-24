@@ -34,9 +34,9 @@
         <activity
             android:name=".SettingsActivity"
             android:configChanges="uiMode"
-            android:label="@string/title_activity_settings" />
-        <activity android:name=".CreateBudgetActivity"
-            />
+            android:label="@string/title_activity_settings"
+            android:layoutDirection="ltr" />
+        <activity android:name=".CreateBudgetActivity" />
         <activity
             android:name=".PrivacyPolicy"
             android:label="@string/title_activity_privacy_policy"

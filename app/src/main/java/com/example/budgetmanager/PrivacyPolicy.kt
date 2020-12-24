@@ -14,7 +14,11 @@ class PrivacyPolicy : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
         findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout).title = title
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "GitHub Project: https://github.com/BoJoNVi/Budget-Manager", Snackbar.LENGTH_LONG)
+            Snackbar.make(
+                view,
+                "GitHub Project: https://github.com/BoJoNVi/Budget-Manager",
+                Snackbar.LENGTH_LONG
+            )
                 .setAction("Action", null).show()
         }
     }

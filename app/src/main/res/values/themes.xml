@@ -23,12 +23,14 @@
     <style name="Theme.BudgetManager.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorPrimary">#FFFFFF</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
@@ -38,6 +40,7 @@
         <item name="windowNoTitle">true</item>
         <item name="colorPrimaryDark">@color/dark_desaturated_blue</item>
         <item name="colorAccent">@color/dark_desaturated_blue</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
         <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimaryDark</item>
     </style>
