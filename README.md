@@ -7,7 +7,7 @@
 
 ## Project Updates
 ```bash
-DECEMBER 23, 2020 : 01:30PM(noon)
+DECEMBER 24, 2020 : 01:30PM(noon)
 - Login Activity Layout will no longer glitch on other Pixel devices with small resolution
 ```
 ```bash
