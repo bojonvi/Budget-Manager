@@ -1,29 +1,15 @@
 package com.example.budgetmanager
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
-import android.os.Bundle
-import android.view.animation.AnimationUtils
-import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import androidx.core.content.ContextCompat
-import com.google.android.material.button.MaterialButton
 
-class LoginActivity : AppCompatActivity() {
-
-
+class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
+        setContentView(R.layout.signup_activity)
         statusBarColor()
-
-
-        findViewById<MaterialButton>(R.id.login_signUpButton).setOnClickListener {
-            startActivity(Intent(this, SignupActivity::class.java))
-            overridePendingTransition(R.anim.slide_up_in, R.anim.slide_up_out)
-        }
 
     }
 

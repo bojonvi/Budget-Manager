@@ -14,8 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetManager">
         <activity
+            android:name=".SignupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginSignUpTheme" />
+        <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginSignUpTheme" />
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait"
@@ -30,16 +35,15 @@
             android:name=".SettingsActivity"
             android:configChanges="uiMode"
             android:label="@string/title_activity_settings" />
-        <activity android:name=".CreateBudgetActivity" />
+        <activity android:name=".CreateBudgetActivity"
+            />
         <activity
             android:name=".PrivacyPolicy"
             android:label="@string/title_activity_privacy_policy"
             android:theme="@style/Theme.BudgetManager.NoActionBar" />
         <activity
             android:name=".DashboardActivity"
-            android:layoutDirection="ltr"
-
-            />
+            android:layoutDirection="ltr" />
     </application>
 
 </manifest>
