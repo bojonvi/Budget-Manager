@@ -9,6 +9,8 @@
 ```bash
 DECEMBER 24, 2020 : 01:30PM
 - Login Activity Layout will no longer glitch on other Pixel devices with small resolution
+:04:20PM
+- Matched Status Bar color and Navigation Bar color to the Application theme
 ```
 ```bash
 DECEMBER 23, 2020 : 11:41PM
