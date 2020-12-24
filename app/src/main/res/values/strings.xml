@@ -61,4 +61,7 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="show">SHOW</string>
     <string name="facebook">Facebook</string>
     <string name="google">Google</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="data_privacy_policy">DATA PRIVACY POLICY</string>
+    <string name="forgot_password">Forgot Password?</string>
 </resources>
