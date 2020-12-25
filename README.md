@@ -10,6 +10,11 @@
 DECEMBER 25, 2020 : 02:00PM
 - Sign Up Activity added
 - Internet Connectivity logic added
+: 07:00PM
+- Login and Signup account is now working with Email Verification
+- [Press Back again to Exit app] is changed to Confirmation Alert Dialog in Dashboard Activity
+- Logic in Login and Signup improvised
+- Microcopy for confirmation dialogues improvised
 ```
 ```bash
 DECEMBER 24, 2020 : 01:30PM
