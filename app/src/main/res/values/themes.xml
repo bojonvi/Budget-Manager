@@ -35,7 +35,7 @@
         <item name="android:navigationBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
 
-    <style name="LoginSignUpTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="LoginSignUpForgotTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/bluish</item>
         <item name="colorPrimaryVariant">#1E6BB5</item>
         <item name="windowActionBar">false</item>

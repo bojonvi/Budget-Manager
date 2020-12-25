@@ -14,13 +14,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetManager">
         <activity
+            android:name=".ForgotPassword"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginSignUpForgotTheme" />
+        <activity
             android:name=".SignupActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginSignUpTheme" />
+            android:theme="@style/LoginSignUpForgotTheme" />
         <activity
             android:name=".LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginSignUpTheme" />
+            android:theme="@style/LoginSignUpForgotTheme" />
         <activity
             android:name=".SplashScreenActivity"
             android:screenOrientation="portrait"

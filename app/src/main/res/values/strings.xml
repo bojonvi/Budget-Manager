@@ -74,4 +74,7 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="male">Male</string>
     <string name="sign_in_instead">Sign In Instead</string>
     <string name="sign_in">Sign In</string>
+    <string name="forgot_password_string">Forgot Password</string>
+    <string name="email_sent_confirmation">We have sent an email message to your email address provided. The password reset message will be delivered to your Inbox or Spam Folder shortly.</string>
+    <string name="send_email">Send Email</string>
 </resources>

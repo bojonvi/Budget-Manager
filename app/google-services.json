@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1027910760397",
+    "project_id": "ibudget-prepproj",
+    "storage_bucket": "ibudget-prepproj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1027910760397:android:41e0b844569f0ffc5db684",
+        "android_client_info": {
+          "package_name": "com.example.budgetmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1027910760397-rdkmsf9bui9bcort1p1s28lbj045stah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZaTIN0bB8SSqBqOJocBw7r1GVB7NrmOU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1027910760397-rdkmsf9bui9bcort1p1s28lbj045stah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

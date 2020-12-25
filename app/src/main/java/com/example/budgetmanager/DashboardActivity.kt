@@ -2,11 +2,9 @@ package com.example.budgetmanager
 
 import android.content.Intent
 import android.database.Cursor
-import android.graphics.Typeface
 import android.nfc.FormatException
 import android.os.Bundle
 import android.view.Gravity
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
@@ -17,8 +15,8 @@ import androidx.core.content.ContextCompat
 import com.example.budgetmanager.R.drawable.ic_add_dialog
 import com.example.budgetmanager.R.drawable.ic_cancel_dialog
 import com.example.budgetmanager.database.DatabaseHelper
-import java.lang.reflect.Field
 import java.text.DecimalFormat
+
 
 class DashboardActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
@@ -32,17 +30,22 @@ class DashboardActivity : AppCompatActivity() {
     lateinit var budgetData: Cursor
 
     // Press back again to EXIT APPLICATION
+
     override fun onBackPressed() {
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            backToast!!.cancel()
-            finish()
-            return
-        } else {
-            backToast =
-                Toast.makeText(baseContext, "Press back again to exit", Toast.LENGTH_SHORT)
-            backToast!!.show()
-        }
-        backPressedTime = System.currentTimeMillis()
+        AlertDialog.Builder(this)
+            .setTitle("Confirmation to Close Application")
+            .setMessage("Exit the Application?")
+            .setNegativeButton(android.R.string.no, null)
+            .setPositiveButton("YES") { _, _ ->
+                super.onBackPressed()
+                quit() }.create().show() }
+
+    private fun quit() {
+        val start = Intent(Intent.ACTION_MAIN)
+        start.addCategory(Intent.CATEGORY_HOME)
+        start.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(start)
     }
 
     override fun onStart() {
