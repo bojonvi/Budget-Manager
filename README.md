@@ -7,6 +7,11 @@
 
 ## Project Updates
 ```bash
+DECEMBER 25, 2020 : 02:00PM
+- Sign Up Activity added
+- Internet Connectivity logic added
+```
+```bash
 DECEMBER 24, 2020 : 01:30PM
 - Login Activity Layout will no longer glitch on other Pixel devices with small resolution
 :04:20PM
