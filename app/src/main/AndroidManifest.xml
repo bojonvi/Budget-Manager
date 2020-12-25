@@ -44,10 +44,12 @@
         <activity
             android:name=".PrivacyPolicy"
             android:label="@string/title_activity_privacy_policy"
+            android:noHistory="true"
             android:theme="@style/Theme.BudgetManager.NoActionBar" />
         <activity
             android:name=".DashboardActivity"
-            android:layoutDirection="ltr" />
+            android:layoutDirection="ltr"
+            />
     </application>
 
 </manifest>

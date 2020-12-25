@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
             backToast!!.cancel()
-            finish()
+            finishAffinity()
             return
         } else {
             backToast =
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val user = auth.currentUser
         if (user != null) {
-            startActivity(Intent(this, DashboardActivity::class.java))
+            updateUI(user)
         } else {
             Log.e("USER STATUS:", "User Null or Not Logged In")
         }
@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
         statusBarColor()
-        auth = Firebase.auth
+        auth = FirebaseAuth.getInstance()
 
         // Variables
         val loginEmailField: TextInputEditText = findViewById(R.id.login_emailField)
@@ -169,18 +169,18 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(user: FirebaseUser?, ) {
+    private fun updateUI(user: FirebaseUser?) {
         val loginEmailField: TextInputEditText = findViewById(R.id.login_emailField)
         val loginEmailFieldString: String = loginEmailField.text.toString()
+
         if (user != null) {
             if (user.isEmailVerified) {
                 val intent = Intent(Intent(this, DashboardActivity::class.java))
                 intent.putExtra("emailAddress", loginEmailFieldString)
                 startActivity(intent)
                 finish()
-            }
-            else {
-                Toast.makeText(this, "Email is not verified. Please verify email first.", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "Before signing in to your account, please verify your email provided first.", Toast.LENGTH_LONG).show()
             }
 
         }

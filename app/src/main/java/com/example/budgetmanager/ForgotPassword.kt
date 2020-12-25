@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,8 +50,11 @@ class ForgotPassword : AppCompatActivity() {
                         }
                     }
             }
+        }
 
-
+        findViewById<MaterialButton>(R.id.forgotPassword_Back).setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 }

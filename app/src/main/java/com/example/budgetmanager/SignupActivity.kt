@@ -89,7 +89,7 @@ class SignupActivity : AppCompatActivity() {
         val registerConfirmPasswordField: EditText =
             findViewById(R.id.register_confirmPasswordField)
         val genderSelectRadioGroup: RadioGroup = findViewById(R.id.genderSelectRadioGroup)
-        val signUpSignUpButton: Button = findViewById(R.id.signUp_signUpButton)
+        val signUpButton: Button = findViewById(R.id.signUp_signUpButton)
 
 
 
@@ -102,7 +102,7 @@ class SignupActivity : AppCompatActivity() {
         } // genderSelectRadioGroup.setOnCheckedChangeListener {}
 
 
-        signUpSignUpButton.setOnClickListener {
+        signUpButton.setOnClickListener {
 
             // Get and Convert variables to String
             val registerEmailFieldString: String = registerEmailField.text.toString()
@@ -185,10 +185,10 @@ class SignupActivity : AppCompatActivity() {
         )
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener { task ->
+                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this, "To complete Signing Up. Email verification has been sent to your email.", Toast.LENGTH_LONG).show()
                             startActivity(Intent(this, LoginActivity::class.java))
+                            finish()
                         } else {
                             Toast.makeText(this, "There was an error creating the account: " + task.exception, Toast.LENGTH_LONG).show()
                         }
@@ -208,6 +208,7 @@ class SignupActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "Account is unable to register. Please try again. \n" + task.exception, Toast.LENGTH_LONG).show()
                 }
+                finish()
             }
     }
 

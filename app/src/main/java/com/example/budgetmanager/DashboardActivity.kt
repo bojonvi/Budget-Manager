@@ -15,12 +15,14 @@ import androidx.core.content.ContextCompat
 import com.example.budgetmanager.R.drawable.ic_add_dialog
 import com.example.budgetmanager.R.drawable.ic_cancel_dialog
 import com.example.budgetmanager.database.DatabaseHelper
+import com.google.firebase.auth.FirebaseAuth
 import java.text.DecimalFormat
 
 
 class DashboardActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
     private var backToast: Toast? = null
+    private lateinit var auth: FirebaseAuth
 
     lateinit var accountTextView: TextView
     lateinit var databaseHelper: DatabaseHelper
@@ -58,7 +60,7 @@ class DashboardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
-
+        auth = FirebaseAuth.getInstance()
 
         // Variables
         databaseHelper = DatabaseHelper(this)
@@ -85,6 +87,7 @@ class DashboardActivity : AppCompatActivity() {
                         R.id.howToUseAppOption -> goToHowToUseApp()
                         R.id.privacyPolicyOption -> goToPrivacyPolicy()
                         R.id.settingsOption -> goToSettingsActivity()
+                        R.id.signOutOption -> signOutAccount()
                     }
                     return true
                 }
@@ -108,6 +111,10 @@ class DashboardActivity : AppCompatActivity() {
                     val maintenanceInformationAlertDialogShow =
                         maintenanceInformationAlertDialog.create()
                     maintenanceInformationAlertDialogShow.show()
+                }
+
+                private fun signOutAccount() {
+                    FirebaseAuth.getInstance().signOut()
                 }
 
             }) // helpPopupMenu.setOnMenuItemClickListener({ }) Code
