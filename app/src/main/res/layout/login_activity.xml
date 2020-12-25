@@ -174,13 +174,12 @@
 
         <Button
             android:id="@+id/loginButton"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
             android:layout_width="160dp"
             android:layout_height="match_parent"
             android:background="@drawable/login_activity_button"
             android:fontFamily="@font/ubuntu_bold"
             android:padding="10dp"
-            android:text="@string/log_in"
+            android:text="@string/sign_in"
             android:textAllCaps="false"
             android:textSize="20sp"
             app:backgroundTint="@null"
@@ -242,6 +241,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="80dp"
+        android:textAllCaps="false"
         android:text="@string/sign_up"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"

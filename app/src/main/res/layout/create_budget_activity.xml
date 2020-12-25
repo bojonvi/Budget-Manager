@@ -62,8 +62,8 @@
                 android:hint="@string/budget_title"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
-
                 android:inputType="text"
+                android:maxLines="1"
                 android:textColor="@color/cornsilk"
                 android:textColorHint="@color/white"
                 android:textSize="18sp"
@@ -149,7 +149,6 @@
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/ic_money_24dp"
                 android:backgroundTint="@color/white"
-
                 android:contentDescription="@string/create_budget" />
 
             <EditText
@@ -164,6 +163,7 @@
                 android:importantForAutofill="no"
                 android:inputType="numberDecimal"
                 android:maxLength="9"
+                android:maxLines="1"
                 android:textColor="@color/cornsilk"
                 android:textColorHint="@color/white"
                 android:textSize="17sp"
@@ -194,9 +194,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="106dp"
+            android:fontFamily="@font/ubuntu"
             android:text="@string/php"
             android:textColor="@color/white"
-            android:fontFamily="@font/ubuntu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutForCreateBudgetMoneyId" />
 
