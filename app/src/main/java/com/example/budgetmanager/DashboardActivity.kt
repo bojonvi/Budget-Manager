@@ -16,6 +16,8 @@ import com.example.budgetmanager.R.drawable.ic_add_dialog
 import com.example.budgetmanager.R.drawable.ic_cancel_dialog
 import com.example.budgetmanager.database.DatabaseHelper
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.text.DecimalFormat
 
 
@@ -61,6 +63,7 @@ class DashboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashboard_activity)
         auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
 
         // Variables
         databaseHelper = DatabaseHelper(this)
@@ -114,7 +117,9 @@ class DashboardActivity : AppCompatActivity() {
                 }
 
                 private fun signOutAccount() {
-                    FirebaseAuth.getInstance().signOut()
+                    Firebase.auth.signOut() // For app regular email Sign-ins
+                    auth.signOut() // For Google Authentication Sign-ins
+                    finish()
                 }
 
             }) // helpPopupMenu.setOnMenuItemClickListener({ }) Code

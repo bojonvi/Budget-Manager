@@ -78,4 +78,9 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="email_sent_confirmation">We have sent an email message to your email address provided. The password reset message will be delivered to your Inbox or Spam Folder shortly.</string>
     <string name="send_email">Send Email</string>
     <string name="sign_out">Sign Out</string>
+    <string name="user_uid">User UID:</string>
+    <string name="sign_up_for_new_account">Sign Up for New Account</string>
+    <string name="copy_text_to_clipboard">Copy Text to Clipboard</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="night_mode">Night Mode</string>
 </resources>

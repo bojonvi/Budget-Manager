@@ -17,15 +17,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var firestoreAuth: FirebaseFirestore
 
     private fun statusBarColor() {
         // Set Status Bar Color first, in this case it will be dark_desaturated_blue ALWAYS
@@ -81,6 +83,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.signup_activity)
         statusBarColor()
         auth = Firebase.auth
+        firestoreAuth = FirebaseFirestore.getInstance()
 
         // Variables
         val registerEmailField: EditText = findViewById(R.id.register_emailField)
@@ -132,9 +135,7 @@ class SignupActivity : AppCompatActivity() {
                 ) {
                     signUpUser(
                         registerEmailFieldString,
-                        registerPasswordFieldString,
-                        registerUsernameFieldString,
-                        registerConfirmPasswordFieldString
+                        registerPasswordFieldString
                     )
                 } else if (!isValidEmail(registerEmailFieldString)) {
                     registerEmailField.error = "Please input a valid Email Address"
@@ -168,49 +169,67 @@ class SignupActivity : AppCompatActivity() {
                 internetValidationAlert.show()
             }
         } // findViewById<Button>(R.id.signUp_signUpButton).setOnClickListener {}
+
+        findViewById<MaterialButton>(R.id.signUp_logInInsteadButton).setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
     } // override fun onCreate() {}
 
-    private fun signUpUser(
-        registerEmailFieldString: String, registerPasswordFieldString: String,
-        registerUsernameFieldString: String,
-        registerConfirmPasswordFieldString: String
-    ) {
-
-        val registerEmailField: TextInputEditText = findViewById(R.id.register_emailField)
-        val registerPasswordField: TextInputEditText = findViewById(R.id.register_passwordField)
+    private fun signUpUser(registerEmailFieldString: String, registerPasswordFieldString: String) {
+        // Find ID in the xml file
+        val registerEmailField: EditText = findViewById(R.id.register_emailField)
+        val registerPasswordField: EditText = findViewById(R.id.register_passwordField)
 
         auth.createUserWithEmailAndPassword(
             registerEmailFieldString.trim(),
             registerPasswordFieldString.trim()
         )
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    auth.currentUser?.sendEmailVerification()?.addOnCompleteListener(this) { task ->
-                        if (task.isSuccessful) {
-                            startActivity(Intent(this, LoginActivity::class.java))
-                            finish()
-                        } else {
-                            Toast.makeText(this, "There was an error creating the account: " + task.exception, Toast.LENGTH_LONG).show()
+            .addOnCompleteListener(this) { signUpTask ->
+                if (signUpTask.isSuccessful) {
+                    auth.currentUser?.sendEmailVerification()
+                        ?.addOnCompleteListener(this) { theTask ->
+                            if (theTask.isSuccessful) {
+                                Firebase.auth.signOut()
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    "There was an error creating the account: " + theTask.exception,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
-                    }
-                } else if (!task.isSuccessful) {
+                } else if (!signUpTask.isSuccessful) {
                     try {
-                        throw task.exception!!
+                        throw signUpTask.exception!!
                     } catch (e: FirebaseAuthUserCollisionException) {
-                        Toast.makeText(this, "The account [ $registerEmailFieldString ] has been already registered in the System.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "The account [ $registerEmailFieldString ] has been already registered in the System.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         registerEmailField.requestFocus()
                     } catch (e: FirebaseAuthWeakPasswordException) {
-                        Toast.makeText(this, "Weak Password. Input at-least 6 characters.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Weak Password. Input at-least 6 characters.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         registerPasswordField.requestFocus()
                     } catch (e: Exception) {
                         Log.e(this.toString(), e.message.toString())
                     }
                 } else {
-                    Toast.makeText(this, "Account is unable to register. Please try again. \n" + task.exception, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Account is unable to register. Please try again. \n" + signUpTask.exception,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
                 finish()
             }
     }
-
-
 }

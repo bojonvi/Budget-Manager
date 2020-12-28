@@ -19,6 +19,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ibudget_splashscreen_image" />
 
+    <TextView
+        android:id="@+id/loginTextViewLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/made_tommy_regular"
+        android:text="@string/log_in"
+        android:textColor="@color/white"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/viewAboveEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_login_imageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+
     <View
         android:id="@+id/viewAboveEmail"
         android:layout_width="match_parent"
@@ -174,6 +190,7 @@
 
         <Button
             android:id="@+id/loginButton"
+            style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="160dp"
             android:layout_height="match_parent"
             android:background="@drawable/login_activity_button"
@@ -222,31 +239,17 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_privacyPolicyButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/data_privacy_policy"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.858"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <com.google.android.material.button.MaterialButton
         android:id="@+id/login_signUpButton"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:text="@string/sign_up_for_new_account"
         android:textAllCaps="false"
-        android:text="@string/sign_up"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForButtons" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

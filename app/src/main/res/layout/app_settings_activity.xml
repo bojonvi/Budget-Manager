@@ -56,7 +56,7 @@
             android:layout_marginStart="5sp"
             android:background="@null"
             android:fontFamily="@font/ubuntu"
-            android:text="Night Mode"
+            android:text="@string/night_mode"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -65,10 +65,98 @@
             android:id="@+id/switchNightMode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            />
-
+            android:layout_margin="10dp" />
 
     </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/userUIDLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/user_uid"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureImage" />
+
+    <TextView
+        android:id="@+id/userUIDFieldView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="50dp"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/userUIDLabel" />
+
+    <ImageView
+        android:id="@+id/copyTextToClipboardImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_content_copy_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/userUIDFieldView"
+        app:layout_constraintTop_toBottomOf="@+id/userUIDLabel"
+        android:contentDescription="@string/copy_text_to_clipboard" />
+
+    <TextView
+        android:id="@+id/userNameLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/username"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/userUIDFieldView"
+        tools:layout_editor_absoluteX="53dp" />
+
+    <TextView
+        android:id="@+id/userNameFieldView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:fontFamily="@font/ubuntu"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/userNameLabel"
+        tools:layout_editor_absoluteX="56dp" />
+
+    <TextView
+        android:id="@+id/emailAddressLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/email_address"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/userNameFieldView"
+        tools:layout_editor_absoluteX="59dp" />
+
+    <TextView
+        android:id="@+id/emailAddressFieldView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:fontFamily="@font/ubuntu"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/emailAddressLabel"
+        tools:layout_editor_absoluteX="35dp" />
+
+    <ImageView
+        android:id="@+id/profilePictureImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutForNightMode"
+
+        android:contentDescription="@string/profile_picture" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,14 +9,20 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -24,8 +30,12 @@ class LoginActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
     private var backToast: Toast? = null
     private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
 
 
+    companion object {
+        private const val RC_SIGN_IN = 120
+    }
 
     // Press back again to EXIT APPLICATION
     override fun onBackPressed() {
@@ -88,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
             updateUI(user)
         } else {
-            Log.e("USER STATUS:", "User Null or Not Logged In")
+            Log.e("USER STATUS", "No user currently logged in.")
         }
     }
 
@@ -97,10 +107,19 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.login_activity)
         statusBarColor()
         auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
 
         // Variables
         val loginEmailField: TextInputEditText = findViewById(R.id.login_emailField)
         val loginPasswordField: TextInputEditText = findViewById(R.id.login_passwordField)
+
+        // Configure Google Sign In
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("1027910760397-rdkmsf9bui9bcort1p1s28lbj045stah.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+
 
         findViewById<MaterialButton>(R.id.loginButton).setOnClickListener {
             val loginEmailFieldString: String = loginEmailField.text.toString()
@@ -120,23 +139,36 @@ class LoginActivity : AppCompatActivity() {
                     loginEmailField.requestFocus()
                     return@setOnClickListener
                 } else {
+                    try {
+                        auth.signInWithEmailAndPassword(
+                            loginEmailFieldString,
+                            loginPasswordFieldString
+                        )
+                            .addOnCompleteListener(this) { task ->
+                                if (task.isSuccessful) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d("SIGN IN STATUS", "signInWithEmail:success")
+                                    val user = auth.currentUser
+                                    updateUI(user)
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(
+                                        "SIGN IN STATUS",
+                                        "signInWithEmail:failure",
+                                        task.exception
+                                    )
+                                    Toast.makeText(
+                                        baseContext, "Authentication failed.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    updateUI(null)
+                                }
 
-                    auth.signInWithEmailAndPassword(loginEmailFieldString, loginPasswordFieldString)
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("TAG", "signInWithEmail:success")
-                                val user = auth.currentUser
-                                updateUI(user)
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("TAG", "signInWithEmail:failure", task.exception)
-                                Toast.makeText(baseContext, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show()
-                                updateUI(null)
                             }
-
-                        }
+                    } catch (e: Exception) {
+                        var errorMessage = e.message
+                        Toast.makeText(this, "There was a problem signing in.\n $errorMessage", Toast.LENGTH_SHORT).show()
+                    }
                 }
 
             } else {
@@ -167,7 +199,56 @@ class LoginActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.login_forgotPasswordButton).setOnClickListener{
             startActivity(Intent(this, ForgotPassword::class.java))
         }
+
+        findViewById<ImageView>(R.id.login_google_ImageButton).setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+
+        }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val exception = task.exception
+            if (task.isSuccessful) {
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    val account = task.getResult(ApiException::class.java)!!
+                    Log.d("GOOGLE FB AUTH", "firebaseAuthWithGoogle:" + account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+                    Log.w("GOOGLE FB AUTH", "Google sign in failed", e)
+                    // ...
+                }
+            } else {
+                Log.w("LoginActivity", exception.toString())
+            }
+        }
+    } // onActivityResult() {}
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("LoginActivity", "signInWithCredential:success")
+                    val user = auth.currentUser
+                    updateUI(user)
+                } else {
+                    Log.w("LoginActivity", "signInWithCredential:failure", task.exception)
+                    updateUI(null)
+                }
+
+                // ...
+            }
+    }
+
 
     private fun updateUI(user: FirebaseUser?) {
         val loginEmailField: TextInputEditText = findViewById(R.id.login_emailField)
@@ -181,6 +262,7 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             } else {
                 Toast.makeText(this, "Before signing in to your account, please verify your email provided first.", Toast.LENGTH_LONG).show()
+                Firebase.auth.signOut()
             }
 
         }
