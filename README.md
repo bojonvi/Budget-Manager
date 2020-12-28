@@ -7,6 +7,13 @@
 
 ## Project Updates
 ```bash
+DECEMBER 28, 2020 : 04:30PM
+- Google Sign-in Authentication now working
+- Fixed bug in Forgot_Password Activity where Applicaiton crashed when button is pressed
+- Added Profile Picture, UID, CopyTextToClipboard, Username, and Email Information to the Settings
+- Minor changed to UI and UX in Login and Sign-up Activity
+```
+```bash
 DECEMBER 25, 2020 : 02:00PM
 - Sign Up Activity added
 - Internet Connectivity logic added
