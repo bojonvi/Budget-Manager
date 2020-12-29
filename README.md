@@ -7,6 +7,10 @@
 
 ## Project Updates
 ```bash
+DECEMBER 29, 2020 : 04:21PM
+- Facebook Authentication now working and can be use to Sign in
+```
+```bash
 DECEMBER 28, 2020 : 04:30PM
 - Google Sign-in Authentication now working
 - Fixed bug in Forgot_Password Activity where Applicaiton crashed when button is pressed
