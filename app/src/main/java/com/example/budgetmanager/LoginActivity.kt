@@ -3,10 +3,12 @@ package com.example.budgetmanager
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.util.Patterns
 import android.widget.ImageView
@@ -14,23 +16,31 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.util.*
+
 
 class LoginActivity : AppCompatActivity() {
     private var backPressedTime: Long = 0
     private var backToast: Toast? = null
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    var callbackManager = CallbackManager.Factory.create()
 
 
     companion object {
@@ -167,7 +177,11 @@ class LoginActivity : AppCompatActivity() {
                             }
                     } catch (e: Exception) {
                         var errorMessage = e.message
-                        Toast.makeText(this, "There was a problem signing in.\n $errorMessage", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "There was a problem signing in.\n $errorMessage",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
 
@@ -176,7 +190,8 @@ class LoginActivity : AppCompatActivity() {
                 // set message of alert dialog
                 internetValidationDialogInterface.setMessage(
                     "Make sure that WI-FI or Mobile Data is turned on, then try again.\n" +
-                    "You cannot Sign Up Account without an Internet Connection.")
+                            "You cannot Sign Up Account without an Internet Connection."
+                )
                     // if the dialog is cancelable
                     .setCancelable(false)
                     // positive button text and action
@@ -192,12 +207,17 @@ class LoginActivity : AppCompatActivity() {
                 internetValidationAlert.show()
             } // Else
         } // findViewById<MaterialButton>(R.id.loginButton).setOnClickListener{}
-        findViewById<MaterialButton>(R.id.login_signUpButton).setOnClickListener{
+        findViewById<MaterialButton>(R.id.login_signUpButton).setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        findViewById<MaterialButton>(R.id.login_forgotPasswordButton).setOnClickListener{
+        findViewById<MaterialButton>(R.id.login_forgotPasswordButton).setOnClickListener {
             startActivity(Intent(this, ForgotPassword::class.java))
+        }
+
+        findViewById<ImageView>(R.id.login_facebook_ImageButton).setOnClickListener {
+            printHashKey(this)
+            facebookLogin()
         }
 
         findViewById<ImageView>(R.id.login_google_ImageButton).setOnClickListener {
@@ -209,6 +229,8 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        callbackManager.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -249,6 +271,58 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    private fun facebookLogin() {
+        LoginManager.getInstance()
+            .logInWithReadPermissions(this, Arrays.asList("public_profile", "email"))
+        LoginManager.getInstance()
+            .registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult?) {
+                    firebaseAuthWithFacebook(result)
+                }
+
+                override fun onCancel() {
+
+                }
+
+                override fun onError(error: FacebookException?) {
+
+                }
+            })
+    }
+
+    private fun firebaseAuthWithFacebook(result: LoginResult?) {
+        var credential = FacebookAuthProvider.getCredential(result?.accessToken?.token!!)
+        FirebaseAuth.getInstance().signInWithCredential(credential)
+            .addOnCompleteListener { facebookTask ->
+                if (facebookTask.isSuccessful) {
+                    Toast.makeText(this, "Facebook Authentication Successful", Toast.LENGTH_LONG)
+                        .show()
+                    startActivity(Intent(this, DashboardActivity::class.java))
+                } else {
+                    Toast.makeText(this, "Failed to Authentication Facebook", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+    }
+
+    private fun printHashKey(pContext: Context) {
+        try {
+            val info = pContext.packageManager.getPackageInfo(
+                pContext.packageName,
+                PackageManager.GET_SIGNATURES
+            )
+            for (signature in info.signatures) {
+                val md: MessageDigest = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val hashKey: String = String(Base64.encode(md.digest(), 0))
+                println("printHashKey() Hash Key: $hashKey")
+            }
+        } catch (e: NoSuchAlgorithmException) {
+            Log.e("FACEBOOK AUTH", "printHashKey()", e)
+        } catch (e: java.lang.Exception) {
+            Log.e("FACEBOOK AUTH", "printHashKey()", e)
+        }
+    }
 
     private fun updateUI(user: FirebaseUser?) {
         val loginEmailField: TextInputEditText = findViewById(R.id.login_emailField)
@@ -261,7 +335,11 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             } else {
-                Toast.makeText(this, "Before signing in to your account, please verify your email provided first.", Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this,
+                    "Before signing in to your account, please verify your email provided first.",
+                    Toast.LENGTH_LONG
+                ).show()
                 Firebase.auth.signOut()
             }
 
@@ -270,7 +348,3 @@ class LoginActivity : AppCompatActivity() {
 
 
 }
-
-
-
-

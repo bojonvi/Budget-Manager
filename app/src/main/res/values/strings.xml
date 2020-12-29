@@ -83,4 +83,7 @@ Your continued use of our app will be regarded as acceptance of our practices ar
     <string name="copy_text_to_clipboard">Copy Text to Clipboard</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="night_mode">Night Mode</string>
+    <string name="facebook_app_id">153094382944442</string>
+    <string name="fb_login_protocol_scheme">fb153094382944442</string>
+
 </resources>
